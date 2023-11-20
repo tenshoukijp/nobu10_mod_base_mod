@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="モジュール定義">
+      <UniqueIdentifier>{28132113-e771-43f1-8129-51f72746e649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="プロセス">
+      <UniqueIdentifier>{0d286d05-f1d2-4562-abcd-9cc5dc47294f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="エキスポート関数">
+      <UniqueIdentifier>{af5aac4d-fee9-45cc-84ed-3161bbc270d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="デバッグ出力">
+      <UniqueIdentifier>{d678d4f2-0322-4d0f-b32a-75ce40809b0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ウィンドウ">
+      <UniqueIdentifier>{8200209f-be23-4c38-ac80-c44549ea19ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="フォント">
+      <UniqueIdentifier>{c650c496-007f-4a75-a329-41c4cb068fb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="フック関数置き換え系">
+      <UniqueIdentifier>{23562f14-d3e0-4265-a4c8-e8aae82d3382}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game_process.h">
+      <Filter>プロセス</Filter>
+    </ClInclude>
+    <ClInclude Include="output_debug_stream.h">
+      <Filter>デバッグ出力</Filter>
+    </ClInclude>
+    <ClInclude Include="game_window.h">
+      <Filter>ウィンドウ</Filter>
+    </ClInclude>
+    <ClInclude Include="game_font.h">
+      <Filter>フォント</Filter>
+    </ClInclude>
+    <ClInclude Include="hook_functions_replace.h">
+      <Filter>フック関数置き換え系</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="game_process.cpp">
+      <Filter>プロセス</Filter>
+    </ClCompile>
+    <ClCompile Include="output_debug_stream.cpp">
+      <Filter>デバッグ出力</Filter>
+    </ClCompile>
+    <ClCompile Include="export_func.cpp">
+      <Filter>エキスポート関数</Filter>
+    </ClCompile>
+    <ClCompile Include="game_window.cpp">
+      <Filter>ウィンドウ</Filter>
+    </ClCompile>
+    <ClCompile Include="game_font.cpp">
+      <Filter>フォント</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_functions_replace.cpp">
+      <Filter>フック関数置き換え系</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_defwindowproca_custom.cpp">
+      <Filter>フック関数置き換え系</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dllmain.def">
+      <Filter>モジュール定義</Filter>
+    </None>
+  </ItemGroup>
+</Project>
