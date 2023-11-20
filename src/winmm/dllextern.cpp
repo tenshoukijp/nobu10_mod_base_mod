@@ -397,11 +397,9 @@ extern "C" {
     __declspec(naked) void WINAPI d_mmioInstallIOProcW() { _asm { jmp p_mmioInstallIOProcW } }
     
     HMMIO WINAPI d_mmioOpenA( LPSTR pszFileName, LPMMIOINFO pmmioinfo, DWORD fdwOpen ) {
-        /*
-        OutputDebugStream("onMmioOpenA\n");
-        OutputDebugStream(pszFileName);
-        OutputDebugStream("\r\n");
-        */
+        // OutputDebugStream("onMmioOpenA\n");
+        // OutputDebugStream(pszFileName);
+        // OutputDebugStream("\n");
         return p_mmioOpenA(pszFileName, pmmioinfo, fdwOpen);
     }
 
