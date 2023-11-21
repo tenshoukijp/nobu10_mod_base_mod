@@ -2,16 +2,9 @@
 #include "loadmod.h"
 
 using PFNONINITIALIZE = void (WINAPI*)(void*);
-extern PFNONINITIALIZE pMod_onInitialize;
-
-using PFNONGAMEINITIALIZE = void (WINAPI*)();
-extern PFNONGAMEINITIALIZE pMod_onGameInitialize;
-
 using PFNONFINALIZE = void (WINAPI*)();
-extern PFNONFINALIZE pMod_onFinalize;
 
 PFNONINITIALIZE pMod_onInitialize = NULL;
-PFNONGAMEINITIALIZE pMod_onGameInitialize = NULL;
 PFNONFINALIZE   pMod_onFinalize = NULL;
 
 // è´êØò^Mod.dllÇÃì«Ç›çûÇ›
