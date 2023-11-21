@@ -83,16 +83,16 @@ HWND GetCurrentWindowHandle() {
 //------------------------------------------------
 // 現在のウィンドウハンドルが、確かに天翔記HDのものかどうかをチェック
 //------------------------------------------------
-HWND GetNB7WindowHandle(const char *pszClassName) {
+HWND GetNB11WindowHandle(const char *pszClassName) {
 
     // ゲームランチャーからゲーム本体かどちらかのウィンドウがあるはず。
-    HWND hWndNB7HDHandle = NULL;
+    HWND hWndNB11HDHandle = NULL;
 
-    if (!hWndNB7HDHandle) { hWndNB7HDHandle = ::FindWindow(pszClassName, NULL); }
+    if (!hWndNB11HDHandle) { hWndNB11HDHandle = ::FindWindow(pszClassName, NULL); }
 
     HWND hWndCurrentHandle = GetCurrentWindowHandle();
-    if (hWndNB7HDHandle == hWndCurrentHandle) {
-        return hWndNB7HDHandle;
+    if (hWndNB11HDHandle == hWndCurrentHandle) {
+        return hWndNB11HDHandle;
     }
     else {
         return NULL;

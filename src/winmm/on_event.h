@@ -1,7 +1,5 @@
 #pragma once
 
-extern BOOL isNB7GameInitialized;
-
 void onInitialize();
 
 void onGameInitialize();
