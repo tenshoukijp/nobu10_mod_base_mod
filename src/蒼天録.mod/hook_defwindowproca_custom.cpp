@@ -285,7 +285,6 @@ LRESULT Hook_DefWindowProcACustom(
 	LPARAM lParam   // メッセージの 2 番目のパラメータ
 )
 {
-	return 0;
 
 	if (Msg == WM_CREATE) {
 

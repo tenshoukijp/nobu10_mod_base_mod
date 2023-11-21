@@ -158,7 +158,6 @@ HFONT WINAPI Hook_CreateFontA(
     DWORD  iPitchAndFamily,
     LPCSTR pszFaceName
 ) {
-    char* pOverrideFontName = getNB10FontName();
     OutputDebugStream("ƒtƒHƒ“ƒg–¼:%s\n", pszFaceName);
     HFONT hFont = NULL;
     // ‚l‚r –¾’© ‚È‚ç «¯ –¾’©‚Ö

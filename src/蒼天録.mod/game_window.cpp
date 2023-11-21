@@ -6,22 +6,6 @@ HWND hNB10Wnd = NULL;
 
 HWND* referenceOfNB10Wnd = NULL;
 
-// dllが破棄された時に、onDestroyWindowを実行するため。
-extern void onDestroyWindow();
-class GlobalDummyWindow {
-	int isDummy;
-public:
-	GlobalDummyWindow() {
-		isDummy = 0;
-		OutputDebugStream("ダミーインスタンス生成\n");
-	}
-	~GlobalDummyWindow() {
-		isDummy = 0;
-		onDestroyWindow();
-	}
-};
-
-GlobalDummyWindow gameWindow;
 
 void onCreateWindow(HWND hWnd) {
 

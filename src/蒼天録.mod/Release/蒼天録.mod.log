@@ -10,7 +10,7 @@ LINK : warning LNK4232: 名前 蒼天録.mod に ASCII 文字以外の文字が�
 蒼天録.mod.exp : warning LNK4070: .EXP 内の /OUT:蒼天録.mod ディレクティブの指定が出力ファイル名 'C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll' と異なっています。ディレクティブは無視されます。
   コード生成しています。
   Previous IPDB not found, fall back to full compilation.
-  All 107 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 103 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   コード生成が終了しました。
 蒼天録.mod.exp : warning LNK4070: .EXP 内の /OUT:蒼天録.mod ディレクティブの指定が出力ファイル名 'C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll' と異なっています。ディレクティブは無視されます。
   蒼天録.mod.vcxproj -> C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll
