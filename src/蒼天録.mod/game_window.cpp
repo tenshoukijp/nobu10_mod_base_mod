@@ -21,7 +21,11 @@ void onCreateWindow(HWND hWnd) {
 	OutputDebugStream("蒼天録の開始\n");
 }
 
-
+BOOL doneDestroyWindow = FALSE;
 void onDestroyWindow() {
-	OutputDebugStream("ウィンドウ破棄\r\n");
+	if (!doneDestroyWindow) {
+		OutputDebugStream("ウィンドウ破棄\r\n");
+	}
+
+	doneDestroyWindow = TRUE;
 }

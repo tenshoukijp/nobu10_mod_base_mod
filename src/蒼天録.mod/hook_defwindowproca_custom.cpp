@@ -287,11 +287,15 @@ LRESULT Hook_DefWindowProcACustom(
 {
 
 	if (Msg == WM_CREATE) {
+		char pszClassName[256] = { 0 };
+		GetClassName(hWnd, pszClassName, _countof(pszClassName));
+		if (string(pszClassName) == NB10_WINDOW_CLASS_NAME) {
 
-		// ウィンドウ生成のタイミングで、ウィンドウプロシージャをこのMod内のもので指しはさむ
-		wpOrigWndProc = (WNDPROC)SetWindowLong(hWnd, GWL_WNDPROC, (LONG)NB10WndProcCustom);
+			// ウィンドウ生成のタイミングで、ウィンドウプロシージャをこのMod内のもので指しはさむ
+			wpOrigWndProc = (WNDPROC)SetWindowLong(hWnd, GWL_WNDPROC, (LONG)NB10WndProcCustom);
 
-		onCreateWindow(hWnd);
+			onCreateWindow(hWnd);
+		}
 	}
 
 	return 0;
