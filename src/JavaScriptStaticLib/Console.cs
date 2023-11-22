@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 
 // Consoleのチープクラス
-namespace 蒼天録
+namespace ゲーム
 {
     public sealed class JSConsole
     {

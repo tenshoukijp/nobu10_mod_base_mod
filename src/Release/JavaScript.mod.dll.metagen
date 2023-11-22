@@ -25,12 +25,12 @@ Class IJavaScriptStaticLib: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     onRequestBGM(String): PrivateScope, Public, Static, HideBySig
     onRequestSound(String): PrivateScope, Public, Static, HideBySig
     onDestroyWindow(): PrivateScope, Public, Static, HideBySig
-Class 蒼天録.JSConsole: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+Class ゲーム.JSConsole: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
     log(Object[]): PrivateScope, Public, Static, HideBySig
     assert(): PrivateScope, Public, Static, HideBySig
-Class 蒼天録.蒼天録: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+Class ゲーム.蒼天録: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
     _require(String): PrivateScope, Public, Static, HideBySig
