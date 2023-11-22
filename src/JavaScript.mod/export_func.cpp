@@ -24,6 +24,7 @@ extern "C" __declspec(dllexport) void WINAPI onDestroyWindow() {
 }
 
 extern "C" __declspec(dllexport) void WINAPI onMmioOpenA(char* pszFileName, char* bufOverrideFileName) {
+	/*
 	System::String^ filepath = string_to_String(pszFileName);
 	if (filepath->ToLower()->StartsWith("bgm\\") ) {
 		String^ ret = IJavaScriptStaticLib::onRequestBGM(filepath);
@@ -37,4 +38,5 @@ extern "C" __declspec(dllexport) void WINAPI onMmioOpenA(char* pszFileName, char
 			strcpy_s(bufOverrideFileName, 512, String_to_string(ret).c_str());
 		}
 	}
+	*/
 }

@@ -158,15 +158,11 @@ HFONT WINAPI Hook_CreateFontA(
     DWORD  iPitchAndFamily,
     LPCSTR pszFaceName
 ) {
-    OutputDebugStream("フォント名:%s\n", pszFaceName);
     HFONT hFont = NULL;
     // ＭＳ 明朝 なら 将星 明朝へ
     if (std::string(pszFaceName) == "ＭＳ 明朝") {
-        OutputDebugStream("フォントを上書きします\n");
         std::string strOverrideFontName = getNB8FontName();
         if (std::string(strOverrideFontName) != "") {
-            OutputDebugStream("フォント名は...:" + strOverrideFontName);
-            OutputDebugStream("\n");
             hFont = ((PFNCREATEFONTA)pfnOrigCreateFontA)(cHeight, cWidth, cEscapement, cOrientation, cWeight, bItalic, bUnderline, bStrikeOut, iCharSet, iOutPrecision, iClipPrecision, iQuality, iPitchAndFamily, strOverrideFontName.c_str());
 			return hFont;
         }

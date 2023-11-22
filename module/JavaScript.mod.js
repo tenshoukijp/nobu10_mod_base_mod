@@ -18,7 +18,7 @@ function onCreateメインウィンドウ(arg) {
 
 function onRequestフォント(arg) {
     ret = {};
-    ret.フォント名 = "蒼天 明朝";
+    ret.フォント名 = "将星 明朝";
     return ret;
 }
 
@@ -27,18 +27,8 @@ function onDestroyメインウィンドウ() {
 }
 
 function onRequest音楽(arg) {
-    console.log("要求されているBGMファイルは:" + arg.ファイル名);
-
-    ret = {};
-    ret.ファイル名 = "BGM\\07.wav";
-    return ret;
 }
 
 function onRequest効果音(arg) {
-    console.log("要求されている効果音ファイルは:" + arg.ファイル名);
-
-    ret = {};
-    ret.ファイル名 = "SE\\SE117.WAV";
-    return ret;
 }
 

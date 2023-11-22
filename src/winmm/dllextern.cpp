@@ -402,15 +402,9 @@ extern "C" {
         // 全体をクリア
         ZeroMemory(bufOverrideFileName, _countof(bufOverrideFileName));
 
-        OutputDebugStream("onMmioOpenA\n");
-        OutputDebugStream(pszFileName);
-        OutputDebugStream("\r\n");
         onMmioOpenA(pszFileName, bufOverrideFileName);
         // 有効な上書き情報が返ってきているならば、そのファイル名へと差し替え
         if (strlen(bufOverrideFileName) > 0) {
-            OutputDebugStream("オーバーライドされたファイル名は:");
-            OutputDebugStream(bufOverrideFileName);
-            OutputDebugStream("\n");
             return p_mmioOpenA(bufOverrideFileName, pmmioinfo, fdwOpen);
         }
         else {
