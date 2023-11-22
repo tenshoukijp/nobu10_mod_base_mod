@@ -3,9 +3,11 @@
 
 using PFNONINITIALIZE = void (WINAPI*)(void*);
 using PFNONFINALIZE = void (WINAPI*)();
+using PFNONMMIOOPENA = void (WINAPI*)(char*, char*);
 
 PFNONINITIALIZE pMod_onInitialize = NULL;
 PFNONFINALIZE   pMod_onFinalize = NULL;
+PFNONMMIOOPENA  pMod_onMmioOpenA = NULL;
 
 // è´êØò^Mod.dllÇÃì«Ç›çûÇ›
 HMODULE hNB10ModDll = NULL;
@@ -36,4 +38,14 @@ void Mod_onInitialize() {
 		pMod_onInitialize(&hNB10Wnd);
 	}
 }
+
+void Mod_onMmioOpenA(char* pszFileName, char* bufOverrideFileName) {
+	pMod_onMmioOpenA = (PFNONMMIOOPENA)GetProcAddress(hNB10ModDll, "onMmioOpenA");
+	if (hNB10ModDll && pMod_onMmioOpenA) {
+		pMod_onMmioOpenA(pszFileName, bufOverrideFileName);
+	}
+}
+
+
+
 

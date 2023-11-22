@@ -1,0 +1,14 @@
+C:\Users\master\source\repos\烈風伝Mod\JavaScriptStaticLib\bin\Release\JavaScriptStaticLib.netmodule
+C:\Users\master\source\repos\烈風伝Mod\JavaScriptStaticLib\bin\Release\ClearScript.Core.dll
+C:\Users\master\source\repos\烈風伝Mod\JavaScriptStaticLib\bin\Release\ClearScript.V8.dll
+C:\Users\master\source\repos\烈風伝Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.csproj.AssemblyReference.cache
+C:\Users\master\source\repos\烈風伝Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.csproj.CoreCompileInputs.cache
+C:\Users\master\source\repos\烈風伝Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.csproj.CopyComplete
+C:\Users\master\source\repos\烈風伝Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.netmodule
+C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\bin\Release\JavaScriptStaticLib.netmodule
+C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\bin\Release\ClearScript.Core.dll
+C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\bin\Release\ClearScript.V8.dll
+C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.csproj.AssemblyReference.cache
+C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.csproj.CoreCompileInputs.cache
+C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.csproj.CopyComplete
+C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.netmodule

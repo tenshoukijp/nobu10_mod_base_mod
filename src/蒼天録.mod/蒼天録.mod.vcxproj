@@ -89,6 +89,7 @@
     <ClInclude Include="game_process.h" />
     <ClInclude Include="game_window.h" />
     <ClInclude Include="hook_functions_replace.h" />
+    <ClInclude Include="javascript_mod.h" />
     <ClInclude Include="output_debug_stream.h" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,7 @@
     <ClCompile Include="game_window.cpp" />
     <ClCompile Include="hook_defwindowproca_custom.cpp" />
     <ClCompile Include="hook_functions_replace.cpp" />
+    <ClCompile Include="javascript_mod.cpp" />
     <ClCompile Include="output_debug_stream.cpp" />
   </ItemGroup>
   <ItemGroup>

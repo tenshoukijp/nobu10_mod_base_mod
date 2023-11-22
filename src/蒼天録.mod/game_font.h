@@ -1,7 +1,8 @@
 #pragma once
 
 #include <windows.h>
+#include <string>
 
 void onFontInitialize();
 
-char* getNB10FontName();
+std::string getNB8FontName();

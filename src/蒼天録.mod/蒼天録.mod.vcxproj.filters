@@ -34,6 +34,9 @@
     <Filter Include="フック関数置き換え系">
       <UniqueIdentifier>{23562f14-d3e0-4265-a4c8-e8aae82d3382}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JavaScriptMod">
+      <UniqueIdentifier>{83bc9e08-29b7-4c36-a4b7-c67f831facff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_process.h">
@@ -50,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="hook_functions_replace.h">
       <Filter>フック関数置き換え系</Filter>
+    </ClInclude>
+    <ClInclude Include="javascript_mod.h">
+      <Filter>JavaScriptMod</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="hook_defwindowproca_custom.cpp">
       <Filter>フック関数置き換え系</Filter>
+    </ClCompile>
+    <ClCompile Include="javascript_mod.cpp">
+      <Filter>JavaScriptMod</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

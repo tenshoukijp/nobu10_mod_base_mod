@@ -1,0 +1,7 @@
+LIBRARY JavaScript.mod
+EXPORTS
+	onCreateWindow = onCreateWindow @ 1
+	onDestroyWindow = onDestroyWindow @ 2
+	onRequestFont = onRequestFont @ 3
+	onMmioOpenA = onMmioOpenA @ 4
+

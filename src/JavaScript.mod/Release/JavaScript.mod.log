@@ -1,0 +1,13 @@
+﻿  AssemblyInfo.cpp
+  export_func.cpp
+  JavaScript.mod.cpp
+  string_convert.cpp
+  .NETFramework,Version=v4.8.AssemblyAttributes.cpp
+  コードを生成中...
+  JavaScriptStaticLib.netmodule : MSIL .netmodule または /GL を伴ってコンパイルされたモジュールが見つかりました。/LTCG を使用して再開始してください。リンカーのパフォーマンスを向上させるためには、コマンドラインに /LTCG を追加してください。
+     ライブラリ C:\Users\master\source\repos\蒼天録Mod\Release\JavaScript.mod.lib とオブジェクト C:\Users\master\source\repos\蒼天録Mod\Release\JavaScript.mod.exp を作成中
+JavaScript.mod.exp : warning LNK4070: .EXP 内の /OUT:JavaScript.mod ディレクティブの指定が出力ファイル名 'C:\Users\master\source\repos\蒼天録Mod\Release\JavaScript.mod.dll' と異なっています。ディレクティブは無視されます。
+  コード生成しています。
+  コード生成が終了しました。
+JavaScript.mod.exp : warning LNK4070: .EXP 内の /OUT:JavaScript.mod ディレクティブの指定が出力ファイル名 'C:\Users\master\source\repos\蒼天録Mod\Release\JavaScript.mod.dll' と異なっています。ディレクティブは無視されます。
+  JavaScript.mod.vcxproj -> C:\Users\master\source\repos\蒼天録Mod\Release\JavaScript.mod.dll

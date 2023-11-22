@@ -98,8 +98,7 @@
     <ClCompile Include="dllextern.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="loadmod.cpp" />
-    <ClCompile Include="on_finalize.cpp" />
-    <ClCompile Include="on_initialize.cpp" />
+    <ClCompile Include="on_event.cpp" />
     <ClCompile Include="output_debug_stream.cpp" />
     <ClCompile Include="process.cpp" />
   </ItemGroup>

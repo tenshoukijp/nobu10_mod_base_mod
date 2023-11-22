@@ -7,6 +7,7 @@
 #include "game_font.h"
 
 #include "hook_functions_replace.h"
+#include "javascript_mod.h"
 // #include "hook_functions_direct.h"
 
 #include "output_debug_stream.h"
@@ -31,3 +32,6 @@ extern "C" __declspec(dllexport) void WINAPI onInitialize(void* bufOfNB10Wnd) {
 	OutputDebugStream("onInitialize\r\n");
 }
 
+extern "C" __declspec(dllexport) void WINAPI onMmioOpenA(char* pszFileName, char* bufOverrideFileName) {
+	callJSModMmioOpenA(pszFileName, bufOverrideFileName);
+}

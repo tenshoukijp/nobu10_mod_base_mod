@@ -1,3 +1,4 @@
 LIBRARY ‘““V˜^.mod
 EXPORTS
 	onInitialize = onInitialize @ 1
+	onMmioOpenA = onMmioOpenA @ 2

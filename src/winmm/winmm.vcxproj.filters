@@ -53,10 +53,7 @@
     <ClCompile Include="dllextern.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="on_initialize.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="on_finalize.cpp">
+    <ClCompile Include="on_event.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="output_debug_stream.cpp">

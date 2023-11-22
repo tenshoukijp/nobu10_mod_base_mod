@@ -1,0 +1,37 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly JavaScript.mod, Version=0.1.*, Culture=ロケールに依存しない言語 (ロケールに依存しない国): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly ClearScript.Core, Version=7.2.5.0, Culture=neutral, PublicKeyToken=960a7608304be6a9: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly ClearScript.V8, Version=7.2.5.0, Culture=neutral, PublicKeyToken=960a7608304be6a9: 
+	hash=None, flags=None
+Assembly System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Class IJavaScriptStaticLib: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    onCreateWindow(Int32): PrivateScope, Public, Static, HideBySig
+    onRequestFont(): PrivateScope, Public, Static, HideBySig
+    onRequestBGM(String): PrivateScope, Public, Static, HideBySig
+    onRequestSound(String): PrivateScope, Public, Static, HideBySig
+    onDestroyWindow(): PrivateScope, Public, Static, HideBySig
+Class 蒼天録.JSConsole: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    log(Object[]): PrivateScope, Public, Static, HideBySig
+    assert(): PrivateScope, Public, Static, HideBySig
+Class 蒼天録.蒼天録: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    _require(String): PrivateScope, Public, Static, HideBySig
+    _debuginfo(Object[]): PrivateScope, Public, Static, HideBySig
