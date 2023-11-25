@@ -383,7 +383,7 @@ namespace ゲーム
                 try
                 {
 
-                    engine = new V8ScriptEngine(V8ScriptEngineFlags.EnableDynamicModuleImports | V8ScriptEngineFlags.EnableDebugging);
+                    engine = new V8ScriptEngine(V8ScriptEngineFlags.EnableDynamicModuleImports);
 
                     engine.DefaultAccess = ScriptAccess.Full;
                     engine.AllowReflection = true;
