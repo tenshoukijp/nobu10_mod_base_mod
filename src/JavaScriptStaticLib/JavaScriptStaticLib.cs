@@ -383,14 +383,13 @@ namespace ゲーム
                 try
                 {
 
-                    engine = new V8ScriptEngine(V8ScriptEngineFlags.EnableDynamicModuleImports);
+                    engine = new V8ScriptEngine(V8ScriptEngineFlags.EnableDynamicModuleImports | V8ScriptEngineFlags.EnableDebugging);
 
                     engine.DefaultAccess = ScriptAccess.Full;
-                    engine.SuppressExtensionMethodEnumeration = true;
                     engine.AllowReflection = true;
                     engine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableAllLoading;
 
-                    engine.AddHostObject("clr", new HostTypeCollection("mscorlib", "System", "System.Core"));
+                    // engine.AddHostObject("clr", new HostTypeCollection("mscorlib", "System", "System.Core"));
                     engine.AddHostObject("", HostItemFlags.GlobalMembers, new HostTypeCollection("mscorlib", "System", "System.Core"));
                     engine.AddHostObject("host", new ExtendedHostFunctions());
                     rpdobj = new 蒼天録();
