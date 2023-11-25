@@ -17,7 +17,7 @@ function onCreateメインウィンドウ(arg) {
 }
 
 function onRequestフォント(arg) {
-    ret = {};
+    let ret = {};
     ret.フォント名 = "将星 明朝";
     return ret;
 }

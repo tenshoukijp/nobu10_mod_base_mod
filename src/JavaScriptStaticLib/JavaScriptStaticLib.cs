@@ -6,6 +6,7 @@ using Microsoft.ClearScript.V8;
 using ゲーム.Helpers;
 using ゲーム.Extensions;
 using System.Dynamic;
+using Microsoft.ClearScript.JavaScript;
 
 public class IJavaScriptStaticLib
 {
@@ -91,23 +92,6 @@ namespace ゲーム.Extensions
             var error = exception.GetInnerMost<IScriptEngineException>()?.ErrorDetails;
             return error != null ? StringHelpers.CleanupStackTrace(error) : exception.Message;
         }
-    }
-}
-
-namespace ゲーム
-{
-    public class 蒼天録
-    {
-        public static object _require(string filepath)
-        {
-            return StaticLib.require(filepath);
-        }
-
-        public static void _debuginfo(params Object[] expressions)
-        {
-            StaticLib.debuginfo(expressions);
-        }
-
     }
 }
 
@@ -404,6 +388,7 @@ namespace ゲーム
                     engine.DefaultAccess = ScriptAccess.Full;
                     engine.SuppressExtensionMethodEnumeration = true;
                     engine.AllowReflection = true;
+                    engine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableAllLoading;
 
                     engine.AddHostObject("clr", new HostTypeCollection("mscorlib", "System", "System.Core"));
                     engine.AddHostObject("", HostItemFlags.GlobalMembers, new HostTypeCollection("mscorlib", "System", "System.Core"));
@@ -412,8 +397,8 @@ namespace ゲーム
                     engine.AddHostType("蒼天録", typeof(蒼天録));
                     console = new JSConsole();
                     engine.AddHostType("console", typeof(JSConsole));
+                    engine.Execute(new DocumentInfo { Category = ModuleCategory.CommonJS }, "globalThis.require = require");
                     String expression = @"
-                        require = 蒼天録._require;
                         デバッグ出力 = 蒼天録._debuginfo;
                     ";
                     engine.Execute(expression);

@@ -12,3 +12,5 @@ C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\obj\Release\JavaSc
 C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.csproj.CoreCompileInputs.cache
 C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.csproj.CopyComplete
 C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\obj\Release\JavaScriptStaticLib.netmodule
+C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\bin\Release\Newtonsoft.Json.dll
+C:\Users\master\source\repos\蒼天録Mod\JavaScriptStaticLib\bin\Release\ClearScript.V8.ICUData.dll

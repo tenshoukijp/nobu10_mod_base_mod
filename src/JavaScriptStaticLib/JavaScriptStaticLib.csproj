@@ -47,8 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Console.cs" />
+    <Compile Include="パブリック\Console.cs" />
     <Compile Include="JavaScriptStaticLib.cs" />
+    <Compile Include="パブリック\Interface.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
