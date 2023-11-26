@@ -196,6 +196,73 @@ int WINAPI Hook_ReleaseDC(
 }
 
 
+//---------------------------CreateWindowExA
+
+using PFNCREATEWINDOWEXA = HWND(WINAPI *)(DWORD, LPCSTR, LPCSTR, DWORD, int, int, int, int, HWND, HMENU, HINSTANCE, LPVOID);
+
+PROC pfnOrigCreateWindowExA = GetProcAddress(GetModuleHandleA("user32.dll"), "CreateWindowExA");
+
+HWND WINAPI Hook_CreateWindowExA(
+    DWORD     dwExStyle,        // 拡張ウィンドウスタイル
+    LPCSTR    lpClassName,      // ウィンドウクラス名
+    LPCSTR    lpWindowName,     // ウィンドウ名
+    DWORD     dwStyle,          // ウィンドウスタイル
+    int       x,                // ウィンドウの左上隅の x 座標
+    int       y,                // ウィンドウの左上隅の y 座標
+    int       nWidth,           // ウィンドウの幅
+    int       nHeight,          // ウィンドウの高さ
+    HWND      hWndParent,       // 親ウィンドウのハンドル
+    HMENU     hMenu,            // メニューのハンドル
+    HINSTANCE hInstance,        // インスタンスのハンドル
+    LPVOID    lpParam           // 作成データ
+) {
+
+    OutputDebugStream("幅%d", nWidth);
+    OutputDebugStream("高%d", nHeight);
+    OutputDebugStream("dwStyle%d", dwStyle);
+
+    // 元のものを呼び出す
+    // HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, 1600, 1200, hWndParent, hMenu, hInstance, lpParam);
+
+    // 元のものを呼び出す
+	HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+
+	return hWnd;
+}
+
+//---------------------------SetWindowLongA
+
+using PFNSETWINDOWLONGA = LONG(WINAPI *)(HWND, int, LONG);
+
+PROC pfnOrigSetWindowLongA = GetProcAddress(GetModuleHandleA("user32.dll"), "SetWindowLongA");
+
+int count = 0;
+LONG WINAPI Hook_SetWindowLongA(
+    HWND hWnd,      // ウィンドウのハンドル
+    int nIndex,     // ウィンドウのプロパティ
+    LONG dwNewLong  // 新しい値
+) {
+    OutputDebugStream("SetWindowLongAの呼び出し\n");
+    if (nIndex == GWL_STYLE) {
+        OutputDebugStream("GWL_STYLEの呼び出し\n");
+    }
+    if (nIndex == GWL_EXSTYLE) {
+        OutputDebugStream("GWL_EXSTYLEの呼び出し\n");
+    }
+    else {
+        OutputDebugStream("%xの呼び出し\n", nIndex);
+
+    }
+	// 元のものを呼び出す
+	LONG nResult = ((PFNSETWINDOWLONGA)pfnOrigSetWindowLongA)(hWnd, nIndex, dwNewLong);
+
+    // ((PFNSETWINDOWLONGA)pfnOrigSetWindowLongA)(hWnd, GWL_STYLE, WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_VISIBLE);
+
+	return nResult;
+}
+
+//---------------------------SetCooperativeLevel
+
 //---------------------------IsDebuggerPresent
 
 using PFNISDEBUGGERPRESENT = BOOL(WINAPI *)();
@@ -226,8 +293,9 @@ bool isHookBitBlt = false;
 bool isHookCreateDIBitmap = false;
 bool isHookCreateCompatibleDC = false;
 bool isHookGetDIBits = false;
+bool isHookCreateWindowExA = false;
+bool isHookSetWindowLongA = false;
 bool isHookIsDebuggerPresent = false;
-bool isHookUnknown1 = false;
 
 void hookFunctionsReplace() {
 
@@ -251,6 +319,16 @@ void hookFunctionsReplace() {
 		isHookReleaseDC = true;
 		pfnOrig = ::GetProcAddress(GetModuleHandleA("user32.dll"), "ReleaseDC");
 		ReplaceIATEntryInAllMods("user32.dll", pfnOrig, (PROC)Hook_ReleaseDC);
+	}
+    if (!isHookCreateWindowExA) {
+        isHookCreateWindowExA = true;
+        pfnOrig = ::GetProcAddress(GetModuleHandleA("user32.dll"), "CreateWindowExA");
+        ReplaceIATEntryInAllMods("user32.dll", pfnOrig, (PROC)Hook_CreateWindowExA);
+    }
+    if (!isHookSetWindowLongA) {
+		isHookSetWindowLongA = true;
+		pfnOrig = ::GetProcAddress(GetModuleHandleA("user32.dll"), "SetWindowLongA");
+		ReplaceIATEntryInAllMods("user32.dll", pfnOrig, (PROC)Hook_SetWindowLongA);
 	}
     if (!isHookIsDebuggerPresent) {
 		isHookIsDebuggerPresent = true;

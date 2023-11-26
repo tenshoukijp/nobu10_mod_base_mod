@@ -276,6 +276,9 @@ LRESULT APIENTRY NB10WndProcCustom(
 	return CallWindowProc(wpOrigWndProc, hWnd, Msg, wParam, lParam);
 }
 
+using PFNSETWINDOWLONGA = LONG(WINAPI*)(HWND, int, LONG);
+
+extern PROC pfnOrigSetWindowLongA;
 
 // 画像系のハック
 LRESULT Hook_DefWindowProcACustom(
@@ -291,8 +294,9 @@ LRESULT Hook_DefWindowProcACustom(
 		GetClassName(hWnd, pszClassName, _countof(pszClassName));
 		if (string(pszClassName) == NB10_WINDOW_CLASS_NAME) {
 
+
 			// ウィンドウ生成のタイミングで、ウィンドウプロシージャをこのMod内のもので指しはさむ
-			wpOrigWndProc = (WNDPROC)SetWindowLong(hWnd, GWL_WNDPROC, (LONG)NB10WndProcCustom);
+			wpOrigWndProc = (WNDPROC)((PFNSETWINDOWLONGA)pfnOrigSetWindowLongA)(hWnd, GWL_WNDPROC, (LONG)NB10WndProcCustom);
 
 			onCreateWindow(hWnd);
 		}
