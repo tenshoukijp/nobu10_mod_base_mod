@@ -6,12 +6,10 @@
   hook_functions_replace.cpp
   javascript_mod.cpp
   output_debug_stream.cpp
+  .NETFramework,Version=v4.8.AssemblyAttributes.cpp
      ライブラリ C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.lib とオブジェクト C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.exp を作成中
 LINK : warning LNK4232: 名前 蒼天録.mod に ASCII 文字以外の文字が含まれています。932 以外の ANSI コードページを使用すると、DLL をシステムに読み込めない可能性があります
 蒼天録.mod.exp : warning LNK4070: .EXP 内の /OUT:蒼天録.mod ディレクティブの指定が出力ファイル名 'C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll' と異なっています。ディレクティブは無視されます。
-  コード生成しています。
-  Previous IPDB not found, fall back to full compilation.
-  All 127 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  コード生成が終了しました。
+  LINK : /LTCG が指定されましたが、コードの生成は必要ありません。リンク コマンド ラインから /LTCG を削除し、リンカーの性能を改善してください。
 蒼天録.mod.exp : warning LNK4070: .EXP 内の /OUT:蒼天録.mod ディレクティブの指定が出力ファイル名 'C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll' と異なっています。ディレクティブは無視されます。
   蒼天録.mod.vcxproj -> C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll

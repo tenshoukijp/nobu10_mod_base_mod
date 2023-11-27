@@ -8,6 +8,7 @@ void OutputDebugStream(int number) {
 	OutputDebugString(std::to_string(number).c_str());
 }
 
+#pragma unmanaged
 char szBufOutputDebugStream[4096] = "";
 void OutputDebugStream(const char* format, ...) {
 
@@ -32,3 +33,4 @@ void OutputDebugStream(const char* format, ...) {
 	// OutputDebugString‚Ì•û‚Éo‚·B
 	OutputDebugString(szBufOutputDebugStream);
 }
+#pragma managed
