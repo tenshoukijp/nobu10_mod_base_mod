@@ -5,6 +5,7 @@
   hook_defwindowproca_custom.cpp
   hook_functions_replace.cpp
   javascript_mod.cpp
+  mng_文字列変換.cpp
   output_debug_stream.cpp
   .NETFramework,Version=v4.8.AssemblyAttributes.cpp
      ライブラリ C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.lib とオブジェクト C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.exp を作成中

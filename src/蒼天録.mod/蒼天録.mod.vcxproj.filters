@@ -37,6 +37,9 @@
     <Filter Include="JavaScriptMod">
       <UniqueIdentifier>{83bc9e08-29b7-4c36-a4b7-c67f831facff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="文字列変換">
+      <UniqueIdentifier>{b918d784-339f-4181-af0b-45de9ebb5522}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_process.h">
@@ -56,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="javascript_mod.h">
       <Filter>JavaScriptMod</Filter>
+    </ClInclude>
+    <ClInclude Include="mng_文字列変換.h">
+      <Filter>文字列変換</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="javascript_mod.cpp">
       <Filter>JavaScriptMod</Filter>
+    </ClCompile>
+    <ClCompile Include="mng_文字列変換.cpp">
+      <Filter>文字列変換</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

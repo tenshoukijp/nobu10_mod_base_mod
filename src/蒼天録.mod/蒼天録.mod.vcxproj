@@ -93,6 +93,7 @@
     <ClInclude Include="game_window.h" />
     <ClInclude Include="hook_functions_replace.h" />
     <ClInclude Include="javascript_mod.h" />
+    <ClInclude Include="mng_文字列変換.h" />
     <ClInclude Include="output_debug_stream.h" />
   </ItemGroup>
   <ItemGroup>
@@ -103,10 +104,16 @@
     <ClCompile Include="hook_defwindowproca_custom.cpp" />
     <ClCompile Include="hook_functions_replace.cpp" />
     <ClCompile Include="javascript_mod.cpp" />
+    <ClCompile Include="mng_文字列変換.cpp" />
     <ClCompile Include="output_debug_stream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dllmain.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="JavaScript.mod">
+      <HintPath>..\Release\JavaScript.mod.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

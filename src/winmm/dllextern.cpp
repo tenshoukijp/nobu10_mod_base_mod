@@ -401,7 +401,7 @@ extern "C" {
     HMMIO WINAPI d_mmioOpenA(LPSTR pszFileName, LPMMIOINFO pmmioinfo, DWORD fdwOpen) {
         // 全体をクリア
         ZeroMemory(bufOverrideFileName, _countof(bufOverrideFileName));
-
+        OutputDebugStream(pszFileName + "\n"s);
         onMmioOpenA(pszFileName, bufOverrideFileName);
         // 有効な上書き情報が返ってきているならば、そのファイル名へと差し替え
         if (strlen(bufOverrideFileName) > 0) {

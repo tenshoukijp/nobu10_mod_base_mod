@@ -1,1 +1,2 @@
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\蒼天録.mod.vcxproj.AssemblyReference.cache
+C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\蒼天録.mod.vcxproj.CopyComplete
