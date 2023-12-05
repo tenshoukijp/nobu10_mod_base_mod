@@ -22,6 +22,4 @@ void onMmioOpenA(char* pszFileName, char* bufOverrideFileName) {
 
 void onFinalize() {
     freeNB10Mod();
-
-    OutputDebugStream("‘““V˜^‚ÌI—¹\n");
 }

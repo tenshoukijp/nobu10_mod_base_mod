@@ -399,9 +399,9 @@ extern "C" {
     
     char bufOverrideFileName[1024] = "";
     HMMIO WINAPI d_mmioOpenA(LPSTR pszFileName, LPMMIOINFO pmmioinfo, DWORD fdwOpen) {
+        // この関数にOutputDebugStream を入れると、蒼天録の機能で終了しようとすると一瞬で不正終了するので注意。理由は全く不明
         // 全体をクリア
         ZeroMemory(bufOverrideFileName, _countof(bufOverrideFileName));
-        OutputDebugStream(pszFileName + "\n"s);
         onMmioOpenA(pszFileName, bufOverrideFileName);
         // 有効な上書き情報が返ってきているならば、そのファイル名へと差し替え
         if (strlen(bufOverrideFileName) > 0) {

@@ -222,7 +222,7 @@ HWND WINAPI Hook_CreateWindowExA(
     OutputDebugStream("dwStyle%d", dwStyle);
 
     // å≥ÇÃÇ‡ÇÃÇåƒÇ—èoÇ∑
-    // HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, 1600, 1200, hWndParent, hMenu, hInstance, lpParam);
+    // HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
 
     // å≥ÇÃÇ‡ÇÃÇåƒÇ—èoÇ∑
 	HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
@@ -256,7 +256,7 @@ LONG WINAPI Hook_SetWindowLongA(
 	// å≥ÇÃÇ‡ÇÃÇåƒÇ—èoÇ∑
 	LONG nResult = ((PFNSETWINDOWLONGA)pfnOrigSetWindowLongA)(hWnd, nIndex, dwNewLong);
 
-    // ((PFNSETWINDOWLONGA)pfnOrigSetWindowLongA)(hWnd, GWL_STYLE, WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_VISIBLE);
+    // LONG nResult = ((PFNSETWINDOWLONGA)pfnOrigSetWindowLongA)(hWnd, GWL_STYLE, WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_VISIBLE);
 
 	return nResult;
 }

@@ -17,7 +17,6 @@ BOOL loadNB10Mod() {
 
 	// ‘¶İ‚µ‚È‚¢
 	if (!hNB10ModDll) {
-		MessageBoxA(NULL, "‘““V˜^Mod‚ª–³‚¢", "ƒGƒ‰[", NULL);
 		return FALSE;
 	}
 
