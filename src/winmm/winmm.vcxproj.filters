@@ -22,6 +22,9 @@
     <Filter Include="プロセス">
       <UniqueIdentifier>{de08b900-1729-4679-a204-5682d053f2d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ファイル">
+      <UniqueIdentifier>{dfed9243-5b41-4d6f-8c1d-232bf5d3af2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dllmain.h">
@@ -45,6 +48,9 @@
     <ClInclude Include="output_debug_stream.h">
       <Filter>デバッグ出力</Filter>
     </ClInclude>
+    <ClInclude Include="file_attribute.h">
+      <Filter>ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -64,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="process.cpp">
       <Filter>プロセス</Filter>
+    </ClCompile>
+    <ClCompile Include="file_attribute.cpp">
+      <Filter>ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

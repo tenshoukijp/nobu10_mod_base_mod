@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="file_attribute.h" />
     <ClInclude Include="game_font.h" />
     <ClInclude Include="game_process.h" />
     <ClInclude Include="game_window.h" />
@@ -98,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="export_func.cpp" />
+    <ClCompile Include="file_attribute.cpp" />
     <ClCompile Include="game_font.cpp" />
     <ClCompile Include="game_process.cpp" />
     <ClCompile Include="game_window.cpp" />

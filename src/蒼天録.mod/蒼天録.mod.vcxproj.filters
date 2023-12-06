@@ -40,6 +40,9 @@
     <Filter Include="文字列変換">
       <UniqueIdentifier>{b918d784-339f-4181-af0b-45de9ebb5522}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ファイル">
+      <UniqueIdentifier>{d1807dc4-7813-4227-8284-5e96c2d126ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_process.h">
@@ -62,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="mng_文字列変換.h">
       <Filter>文字列変換</Filter>
+    </ClInclude>
+    <ClInclude Include="file_attribute.h">
+      <Filter>ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="mng_文字列変換.cpp">
       <Filter>文字列変換</Filter>
+    </ClCompile>
+    <ClCompile Include="file_attribute.cpp">
+      <Filter>ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

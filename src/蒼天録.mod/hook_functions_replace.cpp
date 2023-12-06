@@ -18,6 +18,7 @@
 // #include "hook_textouta_custom.h"
 
 #include "javascript_mod.h"
+#include "file_attribute.h"
 
 // ImageDirectoryEntryToData
 #pragma comment(lib, "dbghelp.lib")
@@ -283,16 +284,27 @@ HANDLE WINAPI Hook_CreateFileA(
     // 先にカスタムの方を実行。
     // Hook_CreateFileACustom(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 
+    HANDLE nResult;
+
     // JS側からファイル名の変更要求があれば、ぞれ。
-    string overrideFilePath = callJSModRequestFile(lpFileName);
-    if (overrideFilePath.size() > 0) {
-        OutputDebugStream("ファイル名を上書きします。%s\n", overrideFilePath.c_str());
-        HANDLE nResult = ((PFNCREATEFILEA)pfnOrigCreateFileA)(overrideFilePath.c_str(), dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
-        return nResult;
+   // string jsOverrideFilePath = callJSModRequestFile(lpFileName);
+    // デフォルトでチェックするオーバーライドファイル
+    string dfOverrideFilePath = string("OVERRIDE\\") + lpFileName;
+    /*
+    if (jsOverrideFilePath.size() > 0) {
+        OutputDebugStream("ファイル名を上書きします。%s\n", jsOverrideFilePath.c_str());
+        nResult = ((PFNCREATEFILEA)pfnOrigCreateFileA)(jsOverrideFilePath.c_str(), dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+    }
+    else*/ if (isFileExists(dfOverrideFilePath)) {
+        // 元のもの
+        nResult = ((PFNCREATEFILEA)pfnOrigCreateFileA)(dfOverrideFilePath.c_str(), dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+    }
+    else {
+        // 元のもの
+        nResult = ((PFNCREATEFILEA)pfnOrigCreateFileA)(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
     }
 
     // 元のもの
-    HANDLE nResult = ((PFNCREATEFILEA)pfnOrigCreateFileA)(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
     return nResult;
 }
 
