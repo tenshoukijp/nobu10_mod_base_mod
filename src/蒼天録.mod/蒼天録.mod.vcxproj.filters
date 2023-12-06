@@ -43,6 +43,15 @@
     <Filter Include="ファイル">
       <UniqueIdentifier>{d1807dc4-7813-4227-8284-5e96c2d126ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ゲームデータ配列">
+      <UniqueIdentifier>{b0ef10aa-b82a-4810-aa4f-e3fab627e4d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BGM">
+      <UniqueIdentifier>{d44491a3-5289-42fb-b8c3-92295da5208d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="フック関数ダイレクト">
+      <UniqueIdentifier>{bb8bb801-73cb-4bb7-a0e5-47c0375bc319}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_process.h">
@@ -100,6 +109,15 @@
     </ClCompile>
     <ClCompile Include="file_attribute.cpp">
       <Filter>ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="game_data_string_array.cpp">
+      <Filter>ゲームデータ配列</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_bgm_filename.cpp">
+      <Filter>BGM</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_functions_direct.cpp">
+      <Filter>フック関数ダイレクト</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

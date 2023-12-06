@@ -7,6 +7,7 @@ HWND hNB10Wnd = NULL;
 
 HWND* referenceOfNB10Wnd = NULL;
 
+extern void hookFunctionsDirect();
 
 void onCreateWindow(HWND hWnd) {
 
@@ -17,12 +18,15 @@ void onCreateWindow(HWND hWnd) {
 	// 呼び出し元(WinMM.dll)に、「今回の起動ではちゃんとウィンドウが生成されたよ」と伝える。よってゲーム本体が起動された。
 	*referenceOfNB10Wnd = hWnd;
 
+	hookFunctionsDirect();
+
 	// JavaScriptMod
 	callJSModCreateWindow(hWnd);
 
 	OutputDebugStream("ウィンドウ生成\n");
 
 	OutputDebugStream("蒼天録の開始\n");
+
 }
 
 BOOL doneDestroyWindow = FALSE;

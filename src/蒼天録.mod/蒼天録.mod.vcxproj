@@ -100,10 +100,13 @@
   <ItemGroup>
     <ClCompile Include="export_func.cpp" />
     <ClCompile Include="file_attribute.cpp" />
+    <ClCompile Include="game_data_string_array.cpp" />
     <ClCompile Include="game_font.cpp" />
     <ClCompile Include="game_process.cpp" />
     <ClCompile Include="game_window.cpp" />
+    <ClCompile Include="hook_bgm_filename.cpp" />
     <ClCompile Include="hook_defwindowproca_custom.cpp" />
+    <ClCompile Include="hook_functions_direct.cpp" />
     <ClCompile Include="hook_functions_replace.cpp" />
     <ClCompile Include="javascript_mod.cpp" />
     <ClCompile Include="mng_文字列変換.cpp" />
