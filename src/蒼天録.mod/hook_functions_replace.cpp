@@ -6,6 +6,8 @@
 #include <mmsystem.h>
 #include <shellapi.h>
 #include <string>
+#include <algorithm>
+#include <cctype>
 
 #include "output_debug_stream.h"
 #include "game_font.h"
@@ -15,10 +17,12 @@
 // #include "on_event.h"
 // #include "hook_textouta_custom.h"
 
+#include "javascript_mod.h"
 
 // ImageDirectoryEntryToData
 #pragma comment(lib, "dbghelp.lib")
 
+using namespace std;
 
 // ひとつのモジュールに対してAPIフックを行う関数
 void ReplaceIATEntryInOneMod(
@@ -221,11 +225,11 @@ HWND WINAPI Hook_CreateWindowExA(
     OutputDebugStream("高%d", nHeight);
     OutputDebugStream("dwStyle%d", dwStyle);
 
-    // 元のものを呼び出す
-    // HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+    // ウィンドウ状態をなんとか保つ
+    HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
 
     // 元のものを呼び出す
-	HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+	// HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
 
 	return hWnd;
 }
@@ -261,7 +265,36 @@ LONG WINAPI Hook_SetWindowLongA(
 	return nResult;
 }
 
-//---------------------------SetCooperativeLevel
+//---------------------------CreateFileA
+
+using PFNCREATEFILEA = HANDLE(WINAPI*)(LPCSTR, DWORD, DWORD, LPSECURITY_ATTRIBUTES, DWORD, DWORD, HANDLE);
+
+PROC pfnOrigCreateFileA = GetProcAddress(GetModuleHandleA("kernel32.dll"), "CreateFileA");
+// extern HANDLE Hook_CreateFileACustom(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile);
+HANDLE WINAPI Hook_CreateFileA(
+    LPCSTR lpFileName, // ファイル名
+    DWORD dwDesiredAccess, // アクセス方法
+    DWORD dwShareMode, // 共有方法
+    LPSECURITY_ATTRIBUTES lpSecurityAttributes, // セキュリティ記述子
+    DWORD dwCreationDisposition, // 作成方法
+    DWORD dwFlagsAndAttributes, // ファイル属性
+    HANDLE hTemplateFile // テンプレートファイルのハンドル
+) {
+    // 先にカスタムの方を実行。
+    // Hook_CreateFileACustom(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+
+    // JS側からファイル名の変更要求があれば、ぞれ。
+    string overrideFilePath = callJSModRequestFile(lpFileName);
+    if (overrideFilePath.size() > 0) {
+        OutputDebugStream("ファイル名を上書きします。%s\n", overrideFilePath.c_str());
+        HANDLE nResult = ((PFNCREATEFILEA)pfnOrigCreateFileA)(overrideFilePath.c_str(), dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+        return nResult;
+    }
+
+    // 元のもの
+    HANDLE nResult = ((PFNCREATEFILEA)pfnOrigCreateFileA)(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+    return nResult;
+}
 
 //---------------------------IsDebuggerPresent
 
@@ -286,13 +319,8 @@ BOOL WINAPI Hook_IsDebuggerPresent() {
 bool isHookDefWindowProcA = false;
 bool isHookTextOutA = false;
 bool isHookCreateFontA = false;
-bool isHookSetMenu = false;
 bool isHookReleaseDC = false;
-bool isHookEnableMenuItem = false;
-bool isHookBitBlt = false;
-bool isHookCreateDIBitmap = false;
-bool isHookCreateCompatibleDC = false;
-bool isHookGetDIBits = false;
+bool isHookCreateFileA = false;
 bool isHookCreateWindowExA = false;
 bool isHookSetWindowLongA = false;
 bool isHookIsDebuggerPresent = false;
@@ -320,6 +348,11 @@ void hookFunctionsReplace() {
 		pfnOrig = ::GetProcAddress(GetModuleHandleA("user32.dll"), "ReleaseDC");
 		ReplaceIATEntryInAllMods("user32.dll", pfnOrig, (PROC)Hook_ReleaseDC);
 	}
+    if (!isHookCreateFileA) {
+        isHookCreateFileA = true;
+        pfnOrig = ::GetProcAddress(GetModuleHandleA("kernel32.dll"), "CreateFileA");
+        ReplaceIATEntryInAllMods("kernel32.dll", pfnOrig, (PROC)Hook_CreateFileA);
+    }
     if (!isHookCreateWindowExA) {
         isHookCreateWindowExA = true;
         pfnOrig = ::GetProcAddress(GetModuleHandleA("user32.dll"), "CreateWindowExA");

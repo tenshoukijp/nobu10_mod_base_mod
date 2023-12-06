@@ -111,9 +111,9 @@
     <None Include="dllmain.def" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="JavaScript.mod">
-      <HintPath>..\Release\JavaScript.mod.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\JavaScript.mod\JavaScript.mod.csproj">
+      <Project>{fd39b0a3-aadb-4045-9a59-f2bc5e519309}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

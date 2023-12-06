@@ -7,5 +7,9 @@
   </ProjectOutputs>
   <ContentFiles />
   <SatelliteDlls />
-  <NonRecipeFileRefs />
+  <NonRecipeFileRefs>
+    <NonRecipeFileRef>
+      <FullPath>C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\JavaScript.mod.csproj</FullPath>
+    </NonRecipeFileRef>
+  </NonRecipeFileRefs>
 </Project>

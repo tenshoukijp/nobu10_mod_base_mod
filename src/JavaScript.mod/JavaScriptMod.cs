@@ -33,6 +33,10 @@ public class IJavaScriptMod
     {
         return ゲーム.StaticLib.onRequest効果音(filepath);
     }
+    public static String onRequestFile(String filepath)
+    {
+        return ゲーム.StaticLib.onRequestファイル(filepath);
+    }
 }
 
 namespace ゲーム.Helpers
@@ -258,6 +262,33 @@ namespace ゲーム
             return "";
         }
 
+        public static String onRequestファイル(string filename)
+        {
+            try
+            {
+                OutputDebugStream("C#onRequestファイル:" + filename);
+
+                dynamic jsObject = new ExpandoObject();
+                jsObject.ファイル名 = filename;
+                dynamic ret = engine.Script.onRequestファイル(jsObject);
+                if (ret is Undefined)
+                {
+                    return "";
+                }
+                if (ret.ファイル名 is Undefined)
+                {
+                    return "";
+                }
+                OutputDebugStream("ファイル名:" + ret.ファイル名);
+                return ret.ファイル名;
+            }
+            catch (Exception e)
+            {
+                OutputDebugStream("onRequestファイルError:" + e.Message);
+            }
+            return "";
+        }
+
 
         private static bool CreateScope()
         {
@@ -281,10 +312,6 @@ namespace ゲーム
                     engine.AddHostType("console", typeof(JSConsole));
                     // engine.Execute(new DocumentInfo { Category = ModuleCategory.CommonJS }, "globalThis.require = require");
                     engine.Execute(new DocumentInfo { Category = ModuleCategory.CommonJS }, "globalThis.require = require");
-                    String expression = @"
-                        デバッグ出力 = 蒼天録._debuginfo;
-                    ";
-                    engine.Execute(expression);
                 }
                 catch (Exception e)
                 {

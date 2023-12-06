@@ -13,12 +13,12 @@ namespace ゲーム
     {
         public static void log(params Object[] expressions)
         {
-            蒼天録._debuginfo(FormatObjects(expressions));
+            StaticLib.debuginfo(FormatObjects(expressions));
         }
 
         public static void assert()
         {
-            蒼天録._debuginfo("Assertion failed: console.assert");
+            StaticLib.debuginfo("Assertion failed: console.assert");
         }
 
 

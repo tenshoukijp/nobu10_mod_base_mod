@@ -10,7 +10,7 @@ void callJSModCreateWindow(HWND hWnd) {
 
 std::string callJSModRequestFont() {
 	System::String^ fontname = IJavaScriptMod::onRequestFont();
-	if (fontname == nullptr) { return ""; }
+	if (System::String::IsNullOrEmpty(fontname)) { return ""; }
 	return to_native_string(fontname);
 }
 
@@ -22,16 +22,20 @@ void callJSModMmioOpenA(char* pszFileName, char* bufOverrideFileName) {
 	System::String^ filepath = gcnew System::String(pszFileName);
 	if (filepath->ToLower()->StartsWith("bgm\\")) {
 		System::String^ ret = IJavaScriptMod::onRequestBGM(filepath->ToLower());
-		if (ret != nullptr) {
-			OutputDebugString("JavaScript.mod‚ÌonMmioOpenA\n");
+		if (!System::String::IsNullOrEmpty(ret)) {
 			strcpy_s(bufOverrideFileName, 512, to_native_string(ret).c_str());
 		}
 	}
 	else {
 		System::String^ ret = IJavaScriptMod::onRequestSound(filepath->ToLower());
-		OutputDebugStream("JS‚©‚ç•Ô‚Á‚Ä‚«‚½‰¹Šy–¼" + to_native_string(ret + "\n"));
-		if (ret != nullptr) {
+		if (!System::String::IsNullOrEmpty(ret)) {
 			strcpy_s(bufOverrideFileName, 512, to_native_string(ret).c_str());
 		}
 	}
+}
+
+std::string callJSModRequestFile(const char *pszFileName) {
+	System::String^ filepath = IJavaScriptMod::onRequestFile(gcnew System::String(pszFileName));
+	if (System::String::IsNullOrEmpty(filepath)) { return ""; }
+	return to_native_string(filepath);
 }
