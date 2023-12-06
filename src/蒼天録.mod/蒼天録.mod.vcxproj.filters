@@ -52,6 +52,12 @@
     <Filter Include="フック関数ダイレクト">
       <UniqueIdentifier>{bb8bb801-73cb-4bb7-a0e5-47c0375bc319}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ウィンドウモード">
+      <UniqueIdentifier>{dbdd400c-0682-4237-9f15-9ddbf91c4246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ムービー">
+      <UniqueIdentifier>{c200c686-a63a-444e-a630-c17dc52dcb01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_process.h">
@@ -77,6 +83,9 @@
     </ClInclude>
     <ClInclude Include="file_attribute.h">
       <Filter>ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -119,10 +128,21 @@
     <ClCompile Include="hook_functions_direct.cpp">
       <Filter>フック関数ダイレクト</Filter>
     </ClCompile>
+    <ClCompile Include="game_window_mode.cpp">
+      <Filter>ウィンドウモード</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_movie_filename.cpp">
+      <Filter>ムービー</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="dllmain.def">
       <Filter>モジュール定義</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

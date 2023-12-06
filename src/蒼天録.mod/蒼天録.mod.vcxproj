@@ -96,6 +96,7 @@
     <ClInclude Include="javascript_mod.h" />
     <ClInclude Include="mng_文字列変換.h" />
     <ClInclude Include="output_debug_stream.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="export_func.cpp" />
@@ -104,10 +105,12 @@
     <ClCompile Include="game_font.cpp" />
     <ClCompile Include="game_process.cpp" />
     <ClCompile Include="game_window.cpp" />
+    <ClCompile Include="game_window_mode.cpp" />
     <ClCompile Include="hook_bgm_filename.cpp" />
     <ClCompile Include="hook_defwindowproca_custom.cpp" />
     <ClCompile Include="hook_functions_direct.cpp" />
     <ClCompile Include="hook_functions_replace.cpp" />
+    <ClCompile Include="hook_movie_filename.cpp" />
     <ClCompile Include="javascript_mod.cpp" />
     <ClCompile Include="mng_文字列変換.cpp" />
     <ClCompile Include="output_debug_stream.cpp" />
@@ -119,6 +122,9 @@
     <ProjectReference Include="..\JavaScript.mod\JavaScript.mod.csproj">
       <Project>{fd39b0a3-aadb-4045-9a59-f2bc5e519309}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

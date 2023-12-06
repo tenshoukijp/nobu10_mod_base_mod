@@ -4,10 +4,12 @@
   game_font.cpp
   game_process.cpp
   game_window.cpp
+  game_window_mode.cpp
   hook_bgm_filename.cpp
   hook_defwindowproca_custom.cpp
   hook_functions_direct.cpp
   hook_functions_replace.cpp
+  hook_movie_filename.cpp
   javascript_mod.cpp
   mng_文字列変換.cpp
   output_debug_stream.cpp

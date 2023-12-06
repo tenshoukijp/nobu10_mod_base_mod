@@ -66,30 +66,30 @@ BGMの再生ポインタ
 
 int iBGMFileNameCharPointer = NULL;
 
-char bufOverrideMovieName[512] = "";
+char bufOverrideBGMName[512] = "";
 
 void OnSSRExeBGMFileNameExecute() {
 	OutputDebugStream("★★★BGMが通りますよ:");
 	OutputDebugStream("値 %x\n", iBGMFileNameCharPointer);
 	OutputDebugStream("値 %s\n", iBGMFileNameCharPointer);
 
-	ZeroMemory(bufOverrideMovieName, _countof(bufOverrideMovieName));
+	ZeroMemory(bufOverrideBGMName, _countof(bufOverrideBGMName));
 
 	if (iBGMFileNameCharPointer != NULL) {
 		// JSからの上書きファイルパスの指示があったら、それを採用する
-		callJSModRequestBGM((char*)iBGMFileNameCharPointer, bufOverrideMovieName);
-		if (strlen(bufOverrideMovieName) > 0) {
+		callJSModRequestBGM((char*)iBGMFileNameCharPointer, bufOverrideBGMName);
+		if (strlen(bufOverrideBGMName) > 0) {
 			OutputDebugStream("JSからの指示ファイルがあったので、それを使う\n");
-			iBGMFileNameCharPointer = (int)bufOverrideMovieName;
+			iBGMFileNameCharPointer = (int)bufOverrideBGMName;
 		}
 		else {
 			OutputDebugStream("JSからの指示ファイルはなかったので、オーバーライドをチェック\n");
 			// OVERRIDEフォルダに対応するファイルがあれば、それを採用する
-			string overrideMovieName = string("OVERRIDE\\") + string((char*)iBGMFileNameCharPointer);
-			if (isFileExists(overrideMovieName)) {
+			string overrideBGMName = string("OVERRIDE\\") + string((char*)iBGMFileNameCharPointer);
+			if (isFileExists(overrideBGMName)) {
 				OutputDebugStream("オーバーライドファイルが存在するので、それを使う\n");
-				strcpy_s(bufOverrideMovieName, overrideMovieName.c_str());
-				iBGMFileNameCharPointer = (int)bufOverrideMovieName;
+				strcpy_s(bufOverrideBGMName, overrideBGMName.c_str());
+				iBGMFileNameCharPointer = (int)bufOverrideBGMName;
 			}
 		}
 	}
