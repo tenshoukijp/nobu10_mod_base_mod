@@ -266,8 +266,6 @@ namespace ゲーム
         {
             try
             {
-                OutputDebugStream("C#onRequestファイル:" + filename);
-
                 dynamic jsObject = new ExpandoObject();
                 jsObject.ファイル名 = filename;
                 dynamic ret = engine.Script.onRequestファイル(jsObject);
