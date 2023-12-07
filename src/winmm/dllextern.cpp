@@ -63,7 +63,12 @@ FARPROC p_mciGetErrorStringA;
 FARPROC p_mciGetErrorStringW;
 FARPROC p_mciGetYieldProc;
 FARPROC p_mciLoadCommandResource;
-FARPROC p_mciSendCommandA;
+
+// FARPROC p_mciSendCommandA;
+// ★ カスタム
+using PFNMCISENDCOMMAND = MCIERROR(WINAPI*)(MCIDEVICEID IDDevice, UINT uMsg, DWORD_PTR fdwCommand, DWORD_PTR dwParam);
+PFNMCISENDCOMMAND p_mciSendCommandA;
+
 FARPROC p_mciSendCommandW;
 FARPROC p_mciSendStringA;
 FARPROC p_mciSendStringW;
@@ -135,14 +140,22 @@ FARPROC p_mmTaskSignal;
 FARPROC p_mmTaskYield;
 FARPROC p_mmioAdvance;
 FARPROC p_mmioAscend;
-FARPROC p_mmioClose;
+
+// FARPROC p_mmioClose;
+using PFNMMIOCLOSE = MMRESULT(WINAPI*)(HMMIO hmmio, UINT fuClose);
+PFNMMIOCLOSE p_mmioClose;
+
 FARPROC p_mmioCreateChunk;
 FARPROC p_mmioDescend;
 FARPROC p_mmioFlush;
 FARPROC p_mmioGetInfo;
 FARPROC p_mmioInstallIOProcA;
 FARPROC p_mmioInstallIOProcW;
-FARPROC p_mmioOpenA;
+
+// FARPROC p_mmioOpenA;
+using PFNMMIOOPENA = HMMIO(WINAPI*)(LPSTR pszFileName, LPMMIOINFO pmmioinfo, DWORD fdwOpen);
+PFNMMIOOPENA p_mmioOpenA;
+
 FARPROC p_mmioOpenW;
 FARPROC p_mmioRead;
 FARPROC p_mmioRenameA;
@@ -259,7 +272,21 @@ extern "C" {
     __declspec(naked) void WINAPI d_mciGetErrorStringW() { _asm { jmp p_mciGetErrorStringW } }
     __declspec(naked) void WINAPI d_mciGetYieldProc() { _asm { jmp p_mciGetYieldProc } }
     __declspec(naked) void WINAPI d_mciLoadCommandResource() { _asm { jmp p_mciLoadCommandResource } }
-    __declspec(naked) void WINAPI d_mciSendCommandA() { _asm { jmp p_mciSendCommandA } }
+    /*
+    __declspec(naked) void WINAPI d_mciSendCommandA() {
+        _asm {
+            call onMciSendCommand
+            jmp p_mciSendCommandA
+        }
+    }
+    */
+
+    /*
+     mciSendCommandのカスタム
+    */
+    MCIERROR WINAPI d_mciSendCommandA(MCIDEVICEID IDDevice, UINT uMsg, DWORD_PTR fdwCommand, DWORD_PTR dwParam) {
+        return p_mciSendCommandA(IDDevice, uMsg, fdwCommand, dwParam);
+    }
     __declspec(naked) void WINAPI d_mciSendCommandW() { _asm { jmp p_mciSendCommandW } }
     __declspec(naked) void WINAPI d_mciSendStringA() { _asm { jmp p_mciSendStringA } }
     __declspec(naked) void WINAPI d_mciSendStringW() { _asm { jmp p_mciSendStringW } }
@@ -330,20 +357,93 @@ extern "C" {
     __declspec(naked) void WINAPI d_mmTaskSignal() { _asm { jmp p_mmTaskSignal } }
     __declspec(naked) void WINAPI d_mmTaskYield() { _asm { jmp p_mmTaskYield } }
     __declspec(naked) void WINAPI d_mmioAdvance() { _asm { jmp p_mmioAdvance } }
-    __declspec(naked) void WINAPI d_mmioAscend() { _asm { jmp p_mmioAscend } }
-    __declspec(naked) void WINAPI d_mmioClose() { _asm { jmp p_mmioClose } }
+
+    void onMmioAscend() {
+       //  OutputDebugStream("onMmioAscend\n");
+    }
+
+    __declspec(naked) void WINAPI d_mmioAscend() {
+        _asm {
+            call onMmioAscend;
+            jmp p_mmioAscend
+        }
+    }
+
+    /*
+    __declspec(naked) void WINAPI d_mmioClose() {
+        _asm {
+            call onMmioClose
+            jmp p_mmioClose
+        }
+    }
+    */
+
+    // map<HMMIO, string> mmioMap;
+    MMRESULT WINAPI d_mmioClose(HMMIO hmmio, UINT fuClose) {
+        // OutputDebugStream("onMmioClose\n");
+        return p_mmioClose(hmmio, fuClose);
+    }
+
     __declspec(naked) void WINAPI d_mmioCreateChunk() { _asm { jmp p_mmioCreateChunk } }
-    __declspec(naked) void WINAPI d_mmioDescend() { _asm { jmp p_mmioDescend } }
+
+    void onMmioDescend() {
+       // OutputDebugStream("onMmioDescend\n");
+    }
+
+    __declspec(naked) void WINAPI d_mmioDescend() {
+        _asm {
+            call onMmioDescend
+            jmp p_mmioDescend
+        }
+    }
     __declspec(naked) void WINAPI d_mmioFlush() { _asm { jmp p_mmioFlush } }
     __declspec(naked) void WINAPI d_mmioGetInfo() { _asm { jmp p_mmioGetInfo } }
     __declspec(naked) void WINAPI d_mmioInstallIOProcA() { _asm { jmp p_mmioInstallIOProcA } }
     __declspec(naked) void WINAPI d_mmioInstallIOProcW() { _asm { jmp p_mmioInstallIOProcW } }
-    __declspec(naked) void WINAPI d_mmioOpenA() { _asm { jmp p_mmioOpenA } }
+
+    HMMIO WINAPI d_mmioOpenA(LPSTR pszFileName, LPMMIOINFO pmmioinfo, DWORD fdwOpen) {
+        // 烈風伝でないなら、通常のWINMMの機能通り
+        if (!hNB10Wnd) {
+            return p_mmioOpenA(pszFileName, pmmioinfo, fdwOpen);
+        }
+
+        // OutputDebugStream("onMmioOpenA\n");
+        // 通常通り
+        return p_mmioOpenA(pszFileName, pmmioinfo, fdwOpen);
+    }
+
+    /*
+    __declspec(naked) void WINAPI d_mmioOpenA() {
+        _asm {
+            call onMmioOpenA
+            jmp p_mmioOpenA
+        }
+    }
+    */
     __declspec(naked) void WINAPI d_mmioOpenW() { _asm { jmp p_mmioOpenW } }
-    __declspec(naked) void WINAPI d_mmioRead() { _asm { jmp p_mmioRead } }
+
+    void onMmioRead() {
+        // OutputDebugStream("onMmioRead\n");
+    }
+    __declspec(naked) void WINAPI d_mmioRead() {
+        _asm {
+            call onMmioRead
+            jmp p_mmioRead
+        }
+    }
+
     __declspec(naked) void WINAPI d_mmioRenameA() { _asm { jmp p_mmioRenameA } }
     __declspec(naked) void WINAPI d_mmioRenameW() { _asm { jmp p_mmioRenameW } }
-    __declspec(naked) void WINAPI d_mmioSeek() { _asm { jmp p_mmioSeek } }
+
+    void onMmioSeek() {
+        // OutputDebugStream("onMmioSeek\n");
+    }
+
+    __declspec(naked) void WINAPI d_mmioSeek() {
+        _asm {
+            call onMmioSeek
+            jmp p_mmioSeek }
+    }
     __declspec(naked) void WINAPI d_mmioSendMessage() { _asm { jmp p_mmioSendMessage } }
     __declspec(naked) void WINAPI d_mmioSetBuffer() { _asm { jmp p_mmioSetBuffer } }
     __declspec(naked) void WINAPI d_mmioSetInfo() { _asm { jmp p_mmioSetInfo } }
@@ -457,7 +557,7 @@ void setDllFuncAddress()
     p_mciGetErrorStringW = GetProcAddress(hOriginalDll, "mciGetErrorStringW");
     p_mciGetYieldProc = GetProcAddress(hOriginalDll, "mciGetYieldProc");
     p_mciLoadCommandResource = GetProcAddress(hOriginalDll, "mciLoadCommandResource");
-    p_mciSendCommandA = GetProcAddress(hOriginalDll, "mciSendCommandA");
+    p_mciSendCommandA = (PFNMCISENDCOMMAND)GetProcAddress(hOriginalDll, "mciSendCommandA"); // ★ カスタム
     p_mciSendCommandW = GetProcAddress(hOriginalDll, "mciSendCommandW");
     p_mciSendStringA = GetProcAddress(hOriginalDll, "mciSendStringA");
     p_mciSendStringW = GetProcAddress(hOriginalDll, "mciSendStringW");
@@ -529,14 +629,18 @@ void setDllFuncAddress()
     p_mmTaskYield = GetProcAddress(hOriginalDll, "mmTaskYield");
     p_mmioAdvance = GetProcAddress(hOriginalDll, "mmioAdvance");
     p_mmioAscend = GetProcAddress(hOriginalDll, "mmioAscend");
-    p_mmioClose = GetProcAddress(hOriginalDll, "mmioClose");
+
+    p_mmioClose = (PFNMMIOCLOSE)GetProcAddress(hOriginalDll, "mmioClose"); // ★カスタム
+
     p_mmioCreateChunk = GetProcAddress(hOriginalDll, "mmioCreateChunk");
     p_mmioDescend = GetProcAddress(hOriginalDll, "mmioDescend");
     p_mmioFlush = GetProcAddress(hOriginalDll, "mmioFlush");
     p_mmioGetInfo = GetProcAddress(hOriginalDll, "mmioGetInfo");
     p_mmioInstallIOProcA = GetProcAddress(hOriginalDll, "mmioInstallIOProcA");
     p_mmioInstallIOProcW = GetProcAddress(hOriginalDll, "mmioInstallIOProcW");
-    p_mmioOpenA =GetProcAddress(hOriginalDll, "mmioOpenA");
+
+    p_mmioOpenA = (PFNMMIOOPENA)GetProcAddress(hOriginalDll, "mmioOpenA"); // ★カスタム
+
     p_mmioOpenW = GetProcAddress(hOriginalDll, "mmioOpenW");
     p_mmioRead = GetProcAddress(hOriginalDll, "mmioRead");
     p_mmioRenameA = GetProcAddress(hOriginalDll, "mmioRenameA");
