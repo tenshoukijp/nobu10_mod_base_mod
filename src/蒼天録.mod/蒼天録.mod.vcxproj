@@ -105,12 +105,18 @@
     <ClCompile Include="game_font.cpp" />
     <ClCompile Include="game_process.cpp" />
     <ClCompile Include="game_window.cpp" />
-    <ClCompile Include="game_window_mode.cpp" />
+    <ClCompile Include="game_window_mode.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="game_window_mode_patch.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="hook_bgm_filename.cpp" />
     <ClCompile Include="hook_defwindowproca_custom.cpp" />
     <ClCompile Include="hook_functions_direct.cpp" />
     <ClCompile Include="hook_functions_replace.cpp" />
     <ClCompile Include="hook_movie_filename.cpp" />
+    <ClCompile Include="hook_sound_filename.cpp" />
     <ClCompile Include="javascript_mod.cpp" />
     <ClCompile Include="mng_文字列変換.cpp" />
     <ClCompile Include="output_debug_stream.cpp" />

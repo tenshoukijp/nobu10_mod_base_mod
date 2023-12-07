@@ -1,3 +1,16 @@
+#include <windows.h>
+#include <string>
+#include "output_debug_stream.h"
+#include "game_process.h"
+#include "file_attribute.h"
+#include "javascript_mod.h"
+#include "ddraw.h"
+using namespace std;
+
+#pragma unmanaged
+
+
+
 /*
 007CEEA0   55               PUSH EBP
 007CEEA1   8BEC             MOV EBP,ESP
@@ -51,7 +64,7 @@
 007CEF29   8B45 30          MOV EAX,DWORD PTR SS:[EBP+30]
 007CEF2C   8B08             MOV ECX,DWORD PTR DS:[EAX]
 007CEF2E   83C4 28          ADD ESP,28
-007CEF31   6A 13            PUSH 13
+007CEF31   6A 13            PUSH 13                               この0x13 は DDSCL_FULLSCREEN=1 | DDSCL_NOWINDOWCHANGES=2 | DDSCL_EXCLUSIVE=16 とたちが悪い。8=DDSCL_NORMALが良い
 007CEF33   52               PUSH EDX
 007CEF34   50               PUSH EAX
 007CEF35   FF51 50          CALL DWORD PTR DS:[ECX+50]
@@ -329,3 +342,77 @@
 008D6E44  73 00 00 00 41 63 74 69 76 65 20 57 69 6E 64 6F  s...Active Windo
 
 */
+
+/*
+007CF075   E9 F2000000      JMP Nobunaga.007CF16C // ここがあるからウィンドウモードにならないのだと思われる。
+007CF07A   50               PUSH EAX
+*/
+
+
+void OnSSRExeChangeDisplayModeExecute() {
+	OutputDebugStream("OnSSRExeChangeDisplayModeExecute");
+}
+
+
+/*
+007CF075   E9 F2000000      JMP Nobunaga.007CF16C // ここがあるからウィンドウモードにならないのだと思われる。
+007CF07A   50               PUSH EAX
+*/
+
+int pSSRExeJumpFromToOnSSRExeChangeDisplayMode = 0x7CF075; // 関数はこのアドレスから、OnSSRExeChangeDisplayModeへとジャンプしてくる。
+int pSSRExeReturnLblFromOnSSRExeChangeDisplayMode = 0x7CF07A; // 関数が最後までいくと、このTENSHOU.EXE内に直接ジャンプする
+
+#pragma warning(disable:4733)
+
+__declspec(naked) void WINAPI OnSSRExeChangeDisplayMode() {
+	// スタックにためておく
+	__asm {
+
+		push eax
+		push ebx
+		push ecx
+		push edx
+		push esp
+		push ebp
+		push esi
+		push edi
+	}
+
+	OnSSRExeChangeDisplayModeExecute();
+
+	// スタックに引き出す
+	__asm {
+		pop edi
+		pop esi
+		pop ebp
+		pop esp
+		pop edx
+		pop ecx
+		pop ebx
+		pop eax
+
+		jmp pSSRExeReturnLblFromOnSSRExeChangeDisplayMode
+	}
+}
+#pragma warning(default: 4733) // ワーニングの抑制を解除する
+
+
+char cmdOnSSRExeJumpFromChangeDisplayMode[6] = "\xE9";
+// 元の命令が5バイト、以後の関数で生まれる命令が合計５バイトなので… 最後１つ使わない
+
+// ニーモニック書き換え用
+void WriteAsmJumperOnSSRExeChangeDisplayMode() {
+
+	// まずアドレスを数字として扱う
+	int iAddress = (int)OnSSRExeChangeDisplayMode;
+	int SubAddress = iAddress - (pSSRExeJumpFromToOnSSRExeChangeDisplayMode + 5);
+	// ５というのは、0046C194  -E9 ????????  JMP TSMod.OnTSExeGetDaimyoKoukeishaBushouID  の命令に必要なバイト数。要するに５バイト足すと次のニーモニック命令群に移動するのだ。そしてそこからの差分がジャンプする際の目的格として利用される。
+	memcpy(cmdOnSSRExeJumpFromChangeDisplayMode + 1, &SubAddress, 4); // +1 はE9の次から4バイト分書き換えるから。
+
+	// 構築したニーモニック命令をTENSHOU.EXEのメモリに書き換える
+	WriteProcessMemory(hCurrentProcess, (LPVOID)(pSSRExeJumpFromToOnSSRExeChangeDisplayMode), cmdOnSSRExeJumpFromChangeDisplayMode, 5, NULL);
+}
+
+
+
+#pragma managed

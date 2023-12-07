@@ -27,6 +27,8 @@ void onCreateWindow(HWND hWnd) {
 
 	OutputDebugStream("‘““V˜^‚ÌŠJŽn\n");
 
+
+
 }
 
 BOOL doneDestroyWindow = FALSE;

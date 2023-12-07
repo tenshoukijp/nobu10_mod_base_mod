@@ -23,6 +23,7 @@ extern "C" __declspec(dllexport) void WINAPI onInitialize(void* bufOfNB10Wnd) {
 	// 本当に将星録本体のゲームが始まり、ウィンドウが描画されたのかのチェック。同じEXEでもランチャーへとバイパスされたりなど、色々あるためこのチェックが欠かせない。
 	referenceOfNB10Wnd = (HWND *)bufOfNB10Wnd;
 
+
 	hookFunctionsReplace();
 
 	char buffer[256] = "";

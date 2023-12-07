@@ -39,6 +39,8 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReserv
                 MessageBox(NULL, "エラー", "「SysWow64」内のwinmm.dllをロードできませんでした。", NULL);
                 return FALSE;
             }
+ 
+            setDllFuncAddress();
         }
 
         // プロセスのフルパスに「Nobunaga10WPK.exe」が含まれているか？

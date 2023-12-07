@@ -227,10 +227,10 @@ HWND WINAPI Hook_CreateWindowExA(
     OutputDebugStream("dwStyle%d", dwStyle);
 
     // ウィンドウ状態をなんとか保つ
-    HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+    // HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
 
     // 元のものを呼び出す
-	// HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+	HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
 
 	return hWnd;
 }

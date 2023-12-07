@@ -35,6 +35,15 @@ void callJSModRequestBGM(char* pszFileName, char* bufOverrideFileName) {
 	}
 }
 
+void callJSModRequestSound(char* pszFileName, char* bufOverrideFileName) {
+	System::String^ filepath = gcnew System::String(pszFileName);
+	System::String^ ret = IJavaScriptMod::onRequestSound(filepath->ToLower());
+	if (!System::String::IsNullOrEmpty(ret)) {
+		strcpy_s(bufOverrideFileName, 512, to_native_string(ret).c_str());
+	}
+}
+
+
 
 std::string callJSModRequestFile(const char *pszFileName) {
 	System::String^ filepath = IJavaScriptMod::onRequestFile(gcnew System::String(pszFileName));

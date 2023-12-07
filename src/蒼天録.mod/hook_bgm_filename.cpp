@@ -4,6 +4,7 @@
 #include "game_process.h"
 #include "file_attribute.h"
 #include "javascript_mod.h"
+#include "game_window.h"
 using namespace std;
 
 #pragma unmanaged
@@ -69,6 +70,7 @@ int iBGMFileNameCharPointer = NULL;
 char bufOverrideBGMName[512] = "";
 
 void OnSSRExeBGMFileNameExecute() {
+
 	OutputDebugStream("šššBGM‚ª’Ê‚è‚Ü‚·‚æ:");
 	OutputDebugStream("’l %x\n", iBGMFileNameCharPointer);
 	OutputDebugStream("’l %s\n", iBGMFileNameCharPointer);

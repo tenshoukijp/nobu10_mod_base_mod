@@ -4,12 +4,12 @@ C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\game_data_string_array.c
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\game_font.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\game_font.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\game_process.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\game_process.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\game_window.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\game_window.obj
-C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\game_window_mode.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\game_window_mode.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_bgm_filename.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_bgm_filename.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_defwindowproca_custom.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_defwindowproca_custom.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_functions_direct.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_functions_direct.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_functions_replace.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_functions_replace.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_movie_filename.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_movie_filename.obj
+C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_sound_filename.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_sound_filename.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\javascript_mod.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\javascript_mod.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\mng_文字列変換.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\mng_文字列変換.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\output_debug_stream.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\output_debug_stream.obj

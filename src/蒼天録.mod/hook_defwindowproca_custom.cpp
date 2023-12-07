@@ -288,12 +288,10 @@ LRESULT Hook_DefWindowProcACustom(
 	LPARAM lParam   // メッセージの 2 番目のパラメータ
 )
 {
-
 	if (Msg == WM_CREATE) {
 		char pszClassName[256] = { 0 };
 		GetClassName(hWnd, pszClassName, _countof(pszClassName));
 		if (string(pszClassName) == NB10_WINDOW_CLASS_NAME) {
-
 
 			// ウィンドウ生成のタイミングで、ウィンドウプロシージャをこのMod内のもので指しはさむ
 			wpOrigWndProc = (WNDPROC)((PFNSETWINDOWLONGA)pfnOrigSetWindowLongA)(hWnd, GWL_WNDPROC, (LONG)NB10WndProcCustom);

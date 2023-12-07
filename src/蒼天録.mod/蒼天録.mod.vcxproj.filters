@@ -58,6 +58,9 @@
     <Filter Include="ムービー">
       <UniqueIdentifier>{c200c686-a63a-444e-a630-c17dc52dcb01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="効果音">
+      <UniqueIdentifier>{6304c152-5bb6-47ac-b5ab-3e9876fdc559}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_process.h">
@@ -133,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="hook_movie_filename.cpp">
       <Filter>ムービー</Filter>
+    </ClCompile>
+    <ClCompile Include="game_window_mode_patch.cpp">
+      <Filter>ウィンドウモード</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_sound_filename.cpp">
+      <Filter>効果音</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
