@@ -12,6 +12,7 @@ using namespace std;
 
 
 HINSTANCE hOriginalDll;
+extern HWND hNB10Wnd;
 
 
 FARPROC p_NONAME1;
@@ -400,6 +401,12 @@ extern "C" {
     
     char bufOverrideFileName[1024] = "";
     HMMIO WINAPI d_mmioOpenA(LPSTR pszFileName, LPMMIOINFO pmmioinfo, DWORD fdwOpen) {
+
+        // 蒼天録でないならば、元来のWINMMの機能通りのものを返す
+        if (!hNB10Wnd) {
+            return p_mmioOpenA(pszFileName, pmmioinfo, fdwOpen);
+        }
+
         // この関数にOutputDebugStream を入れると、蒼天録の機能で終了しようとすると一瞬で不正終了するので注意。理由は全く不明
         // 全体をクリア
         ZeroMemory(bufOverrideFileName, _countof(bufOverrideFileName));

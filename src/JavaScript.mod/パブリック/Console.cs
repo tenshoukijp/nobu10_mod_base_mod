@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023-2024 天翔記.jp
+ * Copyright (c) 2023-2024 蒼天録.jp
  * under the MIT license
  */
 

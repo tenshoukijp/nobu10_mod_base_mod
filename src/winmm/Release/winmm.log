@@ -1,8 +1,13 @@
 ﻿  dllextern.cpp
+  dllmain.cpp
+  file_attribute.cpp
+  loadmod.cpp
+  on_event.cpp
+  output_debug_stream.cpp
+  process.cpp
      ライブラリ C:\Users\master\source\repos\蒼天録Mod\Release\WinMM.lib とオブジェクト C:\Users\master\source\repos\蒼天録Mod\Release\WinMM.exp を作成中
   コード生成しています。
-  115 of 311 functions (37.0%) were compiled, the rest were copied from previous compilation.
-    25 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB not found, fall back to full compilation.
+  All 307 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   コード生成が終了しました。
   winmm.vcxproj -> C:\Users\master\source\repos\蒼天録Mod\Release\WinMM.dll
