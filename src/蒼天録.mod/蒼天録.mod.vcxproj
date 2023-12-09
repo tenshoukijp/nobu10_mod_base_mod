@@ -88,6 +88,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="data_bushou_struct_comment.h" />
+    <ClInclude Include="data_castle_struct_comment.h" />
+    <ClInclude Include="data_castle_struct_kanni_comment.h" />
+    <ClInclude Include="data_kahou_struct_comment.h" />
+    <ClInclude Include="data_yakusyoku_struct_comment.h" />
     <ClInclude Include="file_attribute.h" />
     <ClInclude Include="game_font.h" />
     <ClInclude Include="game_process.h" />

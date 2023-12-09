@@ -61,6 +61,21 @@
     <Filter Include="効果音">
       <UniqueIdentifier>{6304c152-5bb6-47ac-b5ab-3e9876fdc559}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ゲームデータ - 武将">
+      <UniqueIdentifier>{224c9fa3-10a3-4c75-a518-7f81a7ec3518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームデータ - 城">
+      <UniqueIdentifier>{4d8e800d-e715-4738-ae9d-5af011651956}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームデータ - 官位">
+      <UniqueIdentifier>{08c8845b-a8cb-4727-8f95-424383edf6e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームデータ - 役職">
+      <UniqueIdentifier>{6a8890f1-7da8-43a7-b76d-672b913314d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームデータ - 家宝">
+      <UniqueIdentifier>{66fb1a03-1413-467a-a0b3-ce2fe8ae0220}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_process.h">
@@ -89,6 +104,21 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="data_bushou_struct_comment.h">
+      <Filter>ゲームデータ - 武将</Filter>
+    </ClInclude>
+    <ClInclude Include="data_castle_struct_comment.h">
+      <Filter>ゲームデータ - 城</Filter>
+    </ClInclude>
+    <ClInclude Include="data_castle_struct_kanni_comment.h">
+      <Filter>ゲームデータ - 官位</Filter>
+    </ClInclude>
+    <ClInclude Include="data_yakusyoku_struct_comment.h">
+      <Filter>ゲームデータ - 役職</Filter>
+    </ClInclude>
+    <ClInclude Include="data_kahou_struct_comment.h">
+      <Filter>ゲームデータ - 家宝</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
