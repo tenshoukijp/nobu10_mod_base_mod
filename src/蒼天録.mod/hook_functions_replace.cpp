@@ -145,6 +145,38 @@ using PFNEXTTEXTOUTA = BOOL(WINAPI *)(HDC, int, int, UINT, const RECT *, LPCSTR,
 
 PROC pfnOrigExtTextOutA = GetProcAddress(GetModuleHandleA("gdi32.dll"), "ExtTextOutA");
 
+/*
+* 1箇所目(2箇所目のすぐ上)
+007E2F90  |. 6A 00          |PUSH 0                                  ; /pSpacing = NULL
+007E2F92  |. 56             |PUSH ESI                                ; |StringSize
+007E2F93  |. 51             |PUSH ECX                                ; |String
+007E2F94  |. 8B0F           |MOV ECX,DWORD PTR DS:[EDI]              ; |
+007E2F96  |. 6A 00          |PUSH 0                                  ; |pRect = NULL
+007E2F98  |. 6A 00          |PUSH 0                                  ; |Options = 0
+007E2F9A  |. 8D4410 01      |LEA EAX,DWORD PTR DS:[EAX+EDX+1]        ; |
+007E2F9E  |. 8B5424 4C      |MOV EDX,DWORD PTR SS:[ESP+4C]           ; |
+007E2FA2  |. 50             |PUSH EAX                                ; |Y
+007E2FA3  |. 41             |INC ECX                                 ; |
+007E2FA4  |. 51             |PUSH ECX                                ; |X
+007E2FA5  |. 52             |PUSH EDX                                ; |hDC
+007E2FA6  |. FF15 44508700  |CALL DWORD PTR DS:[<&GDI32.ExtTextOutA>>; \ExtTextOutA
+
+*　2箇所目 (1箇所目のすぐ下)
+007E2FCA  |. 6A 00          |PUSH 0                                  ; /pSpacing = NULL
+007E2FCC  |. 56             |PUSH ESI                                ; |StringSize
+007E2FCD  |. 8B77 04        |MOV ESI,DWORD PTR DS:[EDI+4]            ; |
+007E2FD0  |. 52             |PUSH EDX                                ; |String
+007E2FD1  |. 6A 00          |PUSH 0                                  ; |pRect = NULL
+007E2FD3  |. 6A 00          |PUSH 0                                  ; |Options = 0
+007E2FD5  |. 03C6           |ADD EAX,ESI                             ; |
+007E2FD7  |. 50             |PUSH EAX                                ; |Y
+007E2FD8  |. 8B07           |MOV EAX,DWORD PTR DS:[EDI]              ; |
+007E2FDA  |. 50             |PUSH EAX                                ; |X
+007E2FDB  |. 51             |PUSH ECX                                ; |hDC
+007E2FDC  |. FF15 44508700  |CALL DWORD PTR DS:[<&GDI32.ExtTextOutA>>; \ExtTextOutA
+
+
+*/
 BOOL WINAPI Hook_ExtTextOutA(
 	HDC hdc,           // デバイスコンテキストのハンドル
 	int nXStart,       // 開始位置（基準点）の x 座標
@@ -157,13 +189,13 @@ BOOL WINAPI Hook_ExtTextOutA(
 ) {
 	OutputDebugStream("ExtTextOutA:%s\n", lpString);
     OutputDebugStream("ExtTextOutAdd:%x\n", lpString);
+    OutputDebugStream("関数の場所%x\n", Hook_ExtTextOutA);
 
 	// 先にカスタムの方を実行。
 	BOOL nResult = ((PFNEXTTEXTOUTA)pfnOrigExtTextOutA)(hdc, nXStart, nYStart, fuOptions, lprc, lpString, cbCount, lpDx);
 
 	return nResult;
 }
-
 
 
 

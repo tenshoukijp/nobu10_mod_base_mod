@@ -1,10 +1,12 @@
 extern void WriteAsmJumperOnSSRExeSoundFileName();
 extern void WriteAsmJumperOnSSRExeBGMFileName();
 extern void WriteAsmJumperOnSSRExeMovieFileName();
+extern void WriteAsmJumperOnSSRExeTextDraw();
 
 bool isWriteAsmJumperOnSSRExeSoundFileName = false;
 bool isWriteAsmJumperOnSSRExeBGMFileName = false;
 bool isWriteAsmJumperOnSSRExeMovieFileName = false;
+bool isWriteAsmJumperOnSSRExeTextDraw = false;
 
 
 void hookFunctionsDirect() {
@@ -19,5 +21,9 @@ void hookFunctionsDirect() {
 	if (!isWriteAsmJumperOnSSRExeMovieFileName) {
 		WriteAsmJumperOnSSRExeMovieFileName();
 		isWriteAsmJumperOnSSRExeMovieFileName = true;
+	}
+	if (!isWriteAsmJumperOnSSRExeTextDraw) {
+		WriteAsmJumperOnSSRExeTextDraw();
+		isWriteAsmJumperOnSSRExeTextDraw = true;
 	}
 }

@@ -79,6 +79,9 @@
     <Filter Include="鬼車">
       <UniqueIdentifier>{b23e3100-354f-496f-8943-2bf6887f78fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="文字列表示">
+      <UniqueIdentifier>{a99606ba-d9df-4a7f-a5b5-4060e3a8ab2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_process.h">
@@ -184,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="onigwrap.cpp">
       <Filter>鬼車</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_textdraw.cpp">
+      <Filter>文字列表示</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

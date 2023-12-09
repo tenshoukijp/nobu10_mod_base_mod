@@ -124,6 +124,7 @@
     <ClCompile Include="hook_functions_replace.cpp" />
     <ClCompile Include="hook_movie_filename.cpp" />
     <ClCompile Include="hook_sound_filename.cpp" />
+    <ClCompile Include="hook_textdraw.cpp" />
     <ClCompile Include="javascript_mod.cpp" />
     <ClCompile Include="mng_文字列変換.cpp" />
     <ClCompile Include="onigwrap.cpp" />
