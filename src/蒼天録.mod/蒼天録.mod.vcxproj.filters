@@ -76,6 +76,9 @@
     <Filter Include="ゲームデータ - 家宝">
       <UniqueIdentifier>{66fb1a03-1413-467a-a0b3-ce2fe8ae0220}</UniqueIdentifier>
     </Filter>
+    <Filter Include="鬼車">
+      <UniqueIdentifier>{b23e3100-354f-496f-8943-2bf6887f78fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_process.h">
@@ -119,6 +122,12 @@
     </ClInclude>
     <ClInclude Include="data_kahou_struct_comment.h">
       <Filter>ゲームデータ - 家宝</Filter>
+    </ClInclude>
+    <ClInclude Include="onigwrap.h">
+      <Filter>鬼車</Filter>
+    </ClInclude>
+    <ClInclude Include="..\oniguruma\oniguruma.h">
+      <Filter>鬼車</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +182,9 @@
     <ClCompile Include="hook_sound_filename.cpp">
       <Filter>効果音</Filter>
     </ClCompile>
+    <ClCompile Include="onigwrap.cpp">
+      <Filter>鬼車</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="dllmain.def">
@@ -183,5 +195,10 @@
     <ResourceCompile Include="Resource.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="oniguruma.lib">
+      <Filter>鬼車</Filter>
+    </Library>
   </ItemGroup>
 </Project>

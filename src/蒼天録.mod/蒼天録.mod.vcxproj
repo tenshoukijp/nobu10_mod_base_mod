@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\oniguruma\oniguruma.h" />
     <ClInclude Include="data_bushou_struct_comment.h" />
     <ClInclude Include="data_castle_struct_comment.h" />
     <ClInclude Include="data_castle_struct_kanni_comment.h" />
@@ -100,6 +101,7 @@
     <ClInclude Include="hook_functions_replace.h" />
     <ClInclude Include="javascript_mod.h" />
     <ClInclude Include="mng_文字列変換.h" />
+    <ClInclude Include="onigwrap.h" />
     <ClInclude Include="output_debug_stream.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -124,6 +126,7 @@
     <ClCompile Include="hook_sound_filename.cpp" />
     <ClCompile Include="javascript_mod.cpp" />
     <ClCompile Include="mng_文字列変換.cpp" />
+    <ClCompile Include="onigwrap.cpp" />
     <ClCompile Include="output_debug_stream.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +139,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="oniguruma.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

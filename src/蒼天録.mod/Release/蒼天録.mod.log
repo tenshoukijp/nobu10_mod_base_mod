@@ -12,10 +12,11 @@
   hook_sound_filename.cpp
   javascript_mod.cpp
   mng_文字列変換.cpp
+  onigwrap.cpp
   output_debug_stream.cpp
-  .NETFramework,Version=v4.8.AssemblyAttributes.cpp
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\game_data_string_array.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_sound_filename.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  .NETFramework,Version=v4.8.AssemblyAttributes.cpp
      ライブラリ C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.lib とオブジェクト C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.exp を作成中
 LINK : warning LNK4232: 名前 蒼天録.mod に ASCII 文字以外の文字が含まれています。932 以外の ANSI コードページを使用すると、DLL をシステムに読み込めない可能性があります
 蒼天録.mod.exp : warning LNK4070: .EXP 内の /OUT:蒼天録.mod ディレクティブの指定が出力ファイル名 'C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll' と異なっています。ディレクティブは無視されます。
