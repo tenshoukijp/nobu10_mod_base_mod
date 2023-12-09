@@ -118,15 +118,11 @@ LRESULT WINAPI Hook_DefWindowProcA(
 }
 
 
-/**/
 //---------------------------TextOutA
 
-// フックする関数のプロトタイプを定義
 using PFNTEXTOUTA = BOOL(WINAPI *)(HDC, int, int, LPCTSTR, int);
 
 PROC pfnOrigTextOutA = GetProcAddress(GetModuleHandleA("gdi32.dll"), "TextOutA");
-
-extern BOOL isOverrideTextOut;
 
 BOOL WINAPI Hook_TextOutA(
     HDC hdc,           // デバイスコンテキストのハンドル
@@ -135,11 +131,40 @@ BOOL WINAPI Hook_TextOutA(
     LPCTSTR lpString,  // 文字列
     int cbString       // 文字数
 ) {
+
     // 先にカスタムの方を実行。
     BOOL nResult = ((PFNTEXTOUTA)pfnOrigTextOutA)(hdc, nXStart, nYStart, lpString, cbString);
 
     return nResult;
 }
+
+
+//---------------------------ExtTextOutA
+
+using PFNEXTTEXTOUTA = BOOL(WINAPI *)(HDC, int, int, UINT, const RECT *, LPCSTR, UINT, const INT *);
+
+PROC pfnOrigExtTextOutA = GetProcAddress(GetModuleHandleA("gdi32.dll"), "ExtTextOutA");
+
+BOOL WINAPI Hook_ExtTextOutA(
+	HDC hdc,           // デバイスコンテキストのハンドル
+	int nXStart,       // 開始位置（基準点）の x 座標
+	int nYStart,       // 開始位置（基準点）の y 座標
+	UINT fuOptions,    // オプション
+	const RECT *lprc,  // クリッピング矩形
+	LPCSTR lpString,   // 文字列
+	UINT cbCount,      // 文字数
+	const INT *lpDx    // 文字間隔配列
+) {
+	OutputDebugStream("ExtTextOutA:%s\n", lpString);
+    OutputDebugStream("ExtTextOutAdd:%x\n", lpString);
+
+	// 先にカスタムの方を実行。
+	BOOL nResult = ((PFNEXTTEXTOUTA)pfnOrigExtTextOutA)(hdc, nXStart, nYStart, fuOptions, lprc, lpString, cbCount, lpDx);
+
+	return nResult;
+}
+
+
 
 
 //---------------------------CreateFontA
@@ -330,6 +355,7 @@ BOOL WINAPI Hook_IsDebuggerPresent() {
  *----------------------------------------------------------------*/
 bool isHookDefWindowProcA = false;
 bool isHookTextOutA = false;
+bool isHookExtTextOutA = false;
 bool isHookCreateFontA = false;
 bool isHookReleaseDC = false;
 bool isHookCreateFileA = false;
@@ -350,6 +376,11 @@ void hookFunctionsReplace() {
         pfnOrig = ::GetProcAddress(GetModuleHandleA("gdi32.dll"), "TextOutA");
         ReplaceIATEntryInAllMods("gdi32.dll", pfnOrig, (PROC)Hook_TextOutA);
     }
+if (!isHookExtTextOutA) {
+		isHookExtTextOutA = true;
+		pfnOrig = ::GetProcAddress(GetModuleHandleA("gdi32.dll"), "ExtTextOutA");
+		ReplaceIATEntryInAllMods("gdi32.dll", pfnOrig, (PROC)Hook_ExtTextOutA);
+	}
     if (!isHookCreateFontA) {
 		isHookCreateFontA = true;
 		pfnOrig = ::GetProcAddress(GetModuleHandleA("gdi32.dll"), "CreateFontA");
