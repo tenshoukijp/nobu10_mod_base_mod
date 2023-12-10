@@ -45,7 +45,20 @@ void callJSModRequestSound(char* pszFileName, char* bufOverrideFileName) {
 
 
 
-std::string callJSModRequestFile(const char *pszFileName) {
+std::string callJSModRequestBushouKaoID(int iKaoID) {
+	System::String^ filepath = IJavaScriptMod::onRequestKaoID(iKaoID);
+	if (System::String::IsNullOrEmpty(filepath)) { return ""; }
+	return to_native_string(filepath);
+}
+
+std::string callJSModRequestKahouPicID(int iPicID) {
+	System::String^ filepath = IJavaScriptMod::onRequestKahouPicID(iPicID);
+	if (System::String::IsNullOrEmpty(filepath)) { return ""; }
+	return to_native_string(filepath);
+}
+
+
+std::string callJSModRequestFile(const char* pszFileName) {
 	System::String^ filepath = IJavaScriptMod::onRequestFile(gcnew System::String(pszFileName));
 	if (System::String::IsNullOrEmpty(filepath)) { return ""; }
 	return to_native_string(filepath);

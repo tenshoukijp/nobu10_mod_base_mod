@@ -19,6 +19,7 @@
 
 #include "javascript_mod.h"
 #include "file_attribute.h"
+#include "hook_readfile_custom.h"
 
 // ImageDirectoryEntryToData
 #pragma comment(lib, "dbghelp.lib")
@@ -328,6 +329,10 @@ LONG WINAPI Hook_SetWindowLongA(
 
 using PFNCREATEFILEA = HANDLE(WINAPI*)(LPCSTR, DWORD, DWORD, LPSECURITY_ATTRIBUTES, DWORD, DWORD, HANDLE);
 
+HANDLE hFileKAOCG = NULL;
+HANDLE hFileKAHOU = NULL;
+
+
 PROC pfnOrigCreateFileA = GetProcAddress(GetModuleHandleA("kernel32.dll"), "CreateFileA");
 // extern HANDLE Hook_CreateFileACustom(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile);
 HANDLE WINAPI Hook_CreateFileA(
@@ -342,12 +347,16 @@ HANDLE WINAPI Hook_CreateFileA(
     // 先にカスタムの方を実行。
     // Hook_CreateFileACustom(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 
+    OutputDebugStream("CreateFileA:%s\n", lpFileName);
+    string filename = string(lpFileName);
+
+
     HANDLE nResult;
 
     // JS側からファイル名の変更要求があれば、ぞれ。
    // string jsOverrideFilePath = callJSModRequestFile(lpFileName);
     // デフォルトでチェックするオーバーライドファイル
-    string dfOverrideFilePath = string("OVERRIDE\\") + lpFileName;
+    string dfOverrideFilePath = string("OVERRIDE/") + lpFileName;
     /*
     if (jsOverrideFilePath.size() > 0) {
         OutputDebugStream("ファイル名を上書きします。%s\n", jsOverrideFilePath.c_str());
@@ -362,9 +371,146 @@ HANDLE WINAPI Hook_CreateFileA(
         nResult = ((PFNCREATEFILEA)pfnOrigCreateFileA)(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
     }
 
+
+    std::transform(filename.begin(), filename.end(), filename.begin(), [](unsigned char c) { return std::toupper(c); });
+    if (filename == "DATA/KAOCG.NBX") {
+        OutputDebugStream("■CreateFileA:" + std::string(lpFileName) + "\n");
+        hFileKAOCG = nResult;
+    }
+    else if (filename == "DATA/KAHOU.NBX") {
+        OutputDebugStream("■CreateFileA:" + std::string(lpFileName) + "\n");
+        hFileKAHOU = nResult;
+    }
+
+
+
     // 元のもの
     return nResult;
 }
+
+
+//---------------------------SetFilePointer
+
+using PFNSETFILEPOINTER = DWORD(WINAPI*)(HANDLE, LONG, PLONG, DWORD);
+
+PROC pfnOrigSetFilePointer = GetProcAddress(GetModuleHandleA("kernel32.dll"), "SetFilePointer");
+
+const int lDistanceToMoveFirstFace = 96100;  // 実際に織田信長にアクセスした時のlDistanceToMoveの値より
+const int lDistanceToMoveFirstPallette = 25281992;// 実際に織田信長にアクセスした時のlDistanceToMoveの値より
+
+const int lDistanceToMoveFirstKahouPic = 1676; // 実際にツクモナスにアクセスした時のlDistanceToMoveの値より
+const int lDistanceToMoveFirstKahouPallette = 549336;// 実際にツクモナスにアクセスした時のlDistanceToMoveの値より
+
+
+int nTargetKaoID = -1;
+int nTargetKaoPalleteID = -1;
+
+int nTargetKahouGazouID = -1;
+int nTargetKahouGazouPalleteID = -1;
+
+
+// extern DWORD Hook_SetFilePointerCustom(HANDLE hFile, LONG lDistanceToMove, PLONG lpDistanceToMoveHigh, DWORD dwMoveMethod);
+DWORD WINAPI Hook_SetFilePointer(
+    HANDLE hFile, // ファイルのハンドル
+    LONG lDistanceToMove, // 移動量
+    PLONG lpDistanceToMoveHigh, // 移動量の上位 32 ビット
+    DWORD dwMoveMethod // 移動方法
+) {
+    // 先にカスタムの方を実行。
+    // Hook_SetFilePointerCustom(hFile, lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod);
+
+    // 元のもの
+    DWORD nResult = ((PFNSETFILEPOINTER)pfnOrigSetFilePointer)(hFile, lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod);
+    if (hFileKAOCG == hFile) {
+        // パレットより小さいなら顔
+        if (lDistanceToMoveFirstFace <= lDistanceToMove && lDistanceToMove < lDistanceToMoveFirstPallette) {
+            const int header_size = lDistanceToMoveFirstFace; // 織田信長の1番目の画像までがヘッダーファイル
+
+            nTargetKaoID = (lDistanceToMove - header_size) / (KAO_PIC_WIDTH * KAO_PIC_HIGHT);
+            OutputDebugStream("顔SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            OutputDebugStream("顔ID:%d\n", nTargetKaoID);
+        }
+        else if (lDistanceToMoveFirstPallette >= lDistanceToMove) {
+            const int header_size = lDistanceToMoveFirstPallette; // 織田信長の1番目のパレット位置を起点として...
+            nTargetKaoPalleteID = (lDistanceToMove - header_size) / (256*4); // パレットは１つあたり4バイト。それが256色分ある
+            OutputDebugStream("顔SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            OutputDebugStream("顔パレットID:%d\n", nTargetKaoPalleteID);
+        }
+        else {
+            nTargetKaoID = -1;
+            nTargetKaoPalleteID = -1;
+        }
+    }
+    else if (hFileKAHOU == hFile) {
+        if (lDistanceToMoveFirstKahouPic <= lDistanceToMove && lDistanceToMove < lDistanceToMoveFirstKahouPallette) {
+            const int header_size = lDistanceToMoveFirstKahouPic; // ツクモナスの1番目の画像までがヘッダーファイル
+            nTargetKahouGazouID = (lDistanceToMove - header_size) / (KAHOU_PIC_WIDTH * KAHOU_PIC_HIGHT);
+            OutputDebugStream("家宝SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            OutputDebugStream("家宝画像ID:%d\n", nTargetKahouGazouID);
+        }
+        else if (lDistanceToMoveFirstKahouPallette >= lDistanceToMove) {
+            const int header_size = lDistanceToMoveFirstKahouPallette; // 家宝画像の1番目のパレット位置を起点として...
+            nTargetKahouGazouPalleteID = (lDistanceToMove - header_size) / (256 * 4); // パレットは１つあたり4バイト。それが256色分ある
+            OutputDebugStream("家宝SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            OutputDebugStream("家宝パレットID:%d\n", nTargetKahouGazouPalleteID);
+
+        }
+        else {
+            nTargetKahouGazouID = -1;
+            nTargetKahouGazouPalleteID = -1;
+        }
+    }
+    return nResult;
+}
+
+
+//---------------------------ReadFile
+
+using PFNREADFILE = BOOL(WINAPI*)(HANDLE, LPVOID, DWORD, LPDWORD, LPOVERLAPPED);
+
+PROC pfnOrigReadFile = GetProcAddress(GetModuleHandleA("kernel32.dll"), "ReadFile");
+
+extern BOOL Hook_ReadFileCustom_BushouKao(HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
+extern BOOL Hook_ReadFileCustom_BushouKaoPallette(HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
+extern BOOL Hook_ReadFileCustom_KahouGazou(HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
+extern BOOL Hook_ReadFileCustom_KahouGazouPallete(HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
+
+BOOL WINAPI Hook_ReadFile(
+    HANDLE hFile, // ファイルのハンドル
+    LPVOID lpBuffer, // データの格納先
+    DWORD nNumberOfBytesToRead, // 読み込むバイト数
+    LPDWORD lpNumberOfBytesRead, // 実際に読み込んだバイト数
+    LPOVERLAPPED lpOverlapped // オーバーラップ構造体のポインタ
+) {
+
+    // 元のもの
+    BOOL nResult = ((PFNREADFILE)pfnOrigReadFile)(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
+
+    if (hFileKAOCG == hFile) {
+        if (nNumberOfBytesToRead == 1024) {
+            OutputDebugStream("■読み込むバイト数%d\n", nNumberOfBytesToRead);
+            Hook_ReadFileCustom_BushouKaoPallette(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
+
+        } else if(nNumberOfBytesToRead == (KAO_PIC_HIGHT*KAO_PIC_WIDTH)) {
+			OutputDebugStream("■読み込むバイト数%d\n", nNumberOfBytesToRead);
+			Hook_ReadFileCustom_BushouKao(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
+		}
+    }
+    else if (hFileKAHOU == hFile) {
+        if (nNumberOfBytesToRead == 1024) {
+            OutputDebugStream("家宝読み込むバイト数%d\n", nNumberOfBytesToRead);
+            Hook_ReadFileCustom_KahouGazouPallete(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
+        }
+        else if (nNumberOfBytesToRead == (KAHOU_PIC_HIGHT * KAHOU_PIC_WIDTH)) {
+            OutputDebugStream("家宝読み込むバイト数%d\n", nNumberOfBytesToRead);
+            Hook_ReadFileCustom_KahouGazou(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
+        }
+    }
+
+    return nResult;
+}
+
+
 
 //---------------------------IsDebuggerPresent
 
@@ -392,6 +538,8 @@ bool isHookExtTextOutA = false;
 bool isHookCreateFontA = false;
 bool isHookReleaseDC = false;
 bool isHookCreateFileA = false;
+bool isHookSetFilePointer = false;
+bool isHookReadFile = false;
 bool isHookCreateWindowExA = false;
 bool isHookSetWindowLongA = false;
 bool isHookIsDebuggerPresent = false;
@@ -429,6 +577,16 @@ if (!isHookExtTextOutA) {
         pfnOrig = ::GetProcAddress(GetModuleHandleA("kernel32.dll"), "CreateFileA");
         ReplaceIATEntryInAllMods("kernel32.dll", pfnOrig, (PROC)Hook_CreateFileA);
     }
+    if (!isHookSetFilePointer) {
+		isHookSetFilePointer = true;
+		pfnOrig = ::GetProcAddress(GetModuleHandleA("kernel32.dll"), "SetFilePointer");
+		ReplaceIATEntryInAllMods("kernel32.dll", pfnOrig, (PROC)Hook_SetFilePointer);
+	}
+    if (!isHookReadFile) {
+		isHookReadFile = true;
+		pfnOrig = ::GetProcAddress(GetModuleHandleA("kernel32.dll"), "ReadFile");
+		ReplaceIATEntryInAllMods("kernel32.dll", pfnOrig, (PROC)Hook_ReadFile);
+	}
     if (!isHookCreateWindowExA) {
         isHookCreateWindowExA = true;
         pfnOrig = ::GetProcAddress(GetModuleHandleA("user32.dll"), "CreateWindowExA");

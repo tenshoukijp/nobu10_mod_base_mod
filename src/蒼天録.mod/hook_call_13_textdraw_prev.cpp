@@ -29,12 +29,13 @@ char bufTextDraw13Prev[512] = "‚±‚ê‚ ‚ê‚È‚ñ‚©H\xA‚à‚µ‚©‚µ‚Ä’u‚«Š·‚¦‚È‚ñ‚©H\xA‚
 
 void OnSSRExeTextDraw13PrevExecute() {
 	if (TextDraw13Prev_ECX != NULL && strlen((char*)TextDraw13Prev_ECX) > 0) {
+		/*
 		OutputDebugStream("¡TextDraw13Prev‚ª—ˆ‚½‚æ!!!š\n");
 		OutputDebugStream("¡TextDraw13Prev_ECX %xš\n", TextDraw13Prev_ECX);
 		OutputDebugStream("¡TextDraw13Prev_ECX STR %sš\n", TextDraw13Prev_ECX);
 		OutputDebugStream("¡TextDraw13Prev_ESI %xš\n", TextDraw13Prev_ESI);
 		OutputDebugStream("¡TextDraw13Prev_EBX %xš\n", TextDraw13Prev_EBX);
-
+		*/
 		/*
 		if (OnigMatch((char*)TextDraw13Prev_ECX, "‚É‚²–½—ß‚ğ")) {
 			strcpy((char*)TextDraw13Prev_ECX, "‚±‚ê‚ ‚ê‚È‚ñ‚©H\xA’u‚«Š·‚¦‚½‚ñ‚©\xA‚Ù‚ñ‚Ü‚È‚ñ‚©H");

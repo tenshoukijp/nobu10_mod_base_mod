@@ -101,6 +101,7 @@
     <ClInclude Include="game_process.h" />
     <ClInclude Include="game_window.h" />
     <ClInclude Include="hook_functions_replace.h" />
+    <ClInclude Include="hook_readfile_custom.h" />
     <ClInclude Include="javascript_mod.h" />
     <ClInclude Include="mng_文字列変換.h" />
     <ClInclude Include="onigwrap.h" />
@@ -143,6 +144,8 @@
     <ClCompile Include="hook_functions_direct.cpp" />
     <ClCompile Include="hook_functions_replace.cpp" />
     <ClCompile Include="hook_movie_filename.cpp" />
+    <ClCompile Include="hook_readfile_custom_kahou.cpp" />
+    <ClCompile Include="hook_readfile_custom_kao.cpp" />
     <ClCompile Include="hook_sound_filename.cpp" />
     <ClCompile Include="hook_textdraw.cpp" />
     <ClCompile Include="javascript_mod.cpp" />

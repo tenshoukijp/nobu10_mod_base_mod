@@ -37,6 +37,16 @@ public class IJavaScriptMod
     {
         return ゲーム.StaticLib.onRequestファイル(filepath);
     }
+
+    public static String onRequestKaoID(int KaoID)
+    {
+        return ゲーム.StaticLib.onRequest顔画像(KaoID);
+    }
+    public static String onRequestKahouPicID(int PicID)
+    {
+        return ゲーム.StaticLib.onRequest家宝画像(PicID);
+    }
+
 }
 
 namespace ゲーム.Helpers
@@ -261,6 +271,58 @@ namespace ゲーム
             }
             return "";
         }
+
+        public static String onRequest顔画像(int iKaoID)
+        {
+            try
+            {
+                dynamic jsObject = new ExpandoObject();
+                jsObject.画像ID = iKaoID;
+                dynamic ret = engine.Script.onRequest顔画像(jsObject);
+                if (ret is Undefined)
+                {
+                    return "";
+                }
+                if (ret.ファイル名 is Undefined)
+                {
+                    return "";
+                }
+                OutputDebugStream("顔画像:" + ret.ファイル名);
+                return ret.ファイル名;
+            }
+            catch (Exception e)
+            {
+                OutputDebugStream("onRequest顔画像Error:" + e.Message);
+            }
+            return "";
+        }
+
+        public static String onRequest家宝画像(int iKaoID)
+        {
+            try
+            {
+                dynamic jsObject = new ExpandoObject();
+                jsObject.画像ID = iKaoID;
+                dynamic ret = engine.Script.onRequest家宝画像(jsObject);
+                if (ret is Undefined)
+                {
+                    return "";
+                }
+                if (ret.ファイル名 is Undefined)
+                {
+                    return "";
+                }
+                OutputDebugStream("家宝画像:" + ret.ファイル名);
+                return ret.ファイル名;
+            }
+            catch (Exception e)
+            {
+                OutputDebugStream("onRequest家宝画像Error:" + e.Message);
+            }
+            return "";
+        }
+
+
 
         public static String onRequestファイル(string filename)
         {

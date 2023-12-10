@@ -37,7 +37,7 @@
 
 
 void OnSSRExeTextDraw13Execute() {
-	OutputDebugStream("★★★★TextDraw13が来たよ!!!★\n");
+	// OutputDebugStream("★★★★TextDraw13が来たよ!!!★\n");
 }
 
 int pSSRExeJumpFromToOnSSRExeTextDraw13 = 0x7EC474; // 関数はこのアドレスから、OnSSRExeTextDraw13へとジャンプしてくる。

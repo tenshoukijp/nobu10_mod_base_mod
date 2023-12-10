@@ -27,6 +27,8 @@ C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_defwindowproca_cust
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_functions_direct.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_functions_direct.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_functions_replace.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_functions_replace.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_movie_filename.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_movie_filename.obj
+C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_readfile_custom_kahou.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_readfile_custom_kahou.obj
+C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_readfile_custom_kao.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_readfile_custom_kao.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_sound_filename.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_sound_filename.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_textdraw.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\hook_textdraw.obj
 C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\javascript_mod.cpp;C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\Release\javascript_mod.obj

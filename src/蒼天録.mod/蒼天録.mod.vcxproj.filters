@@ -132,6 +132,9 @@
     <ClInclude Include="..\oniguruma\oniguruma.h">
       <Filter>鬼車</Filter>
     </ClInclude>
+    <ClInclude Include="hook_readfile_custom.h">
+      <Filter>フック関数置き換え系</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game_process.cpp">
@@ -244,6 +247,12 @@
     </ClCompile>
     <ClCompile Include="hook_call_13_textdraw_prev.cpp">
       <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_readfile_custom_kao.cpp">
+      <Filter>フック関数置き換え系</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_readfile_custom_kahou.cpp">
+      <Filter>フック関数置き換え系</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

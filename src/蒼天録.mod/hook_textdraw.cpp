@@ -73,6 +73,7 @@ int nTextDrawArg5 = 0;
 
 void OnSSRExeTextDrawExecute() {
 	if (nTextDrawArgTargetString != NULL && strlen((char *)nTextDrawArgTargetString) > 0) {
+		/*
 		OutputDebugStream("TextDrawÇ™í ÇËÇ‹Ç∑ÇÊ");
 		OutputDebugStream("nTextDrawArg1%x\n", nTextDrawArg1);
 		OutputDebugStream("nTextDrawArg2%x\n", nTextDrawArg2);
@@ -80,6 +81,7 @@ void OnSSRExeTextDrawExecute() {
 		OutputDebugStream("ÅönTextDrawArgSTR%s\n", nTextDrawArgTargetString);
 		OutputDebugStream("nTextDrawArg4%x\n", nTextDrawArg4);
 		OutputDebugStream("nTextDrawArg5%x\n", nTextDrawArg5);
+		*/
 	}
 }
 
