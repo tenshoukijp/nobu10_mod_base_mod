@@ -15,6 +15,8 @@
 
 
 extern int nTargetKaoID;
+BYTE kaoPalletteBuffer[KAO_PALLETTE_SIZE];
+bool isNextBufferKaoPallette = false;
 BOOL Hook_ReadFileCustom_BushouKao(
     HANDLE hFile, // ファイルのハンドル
     LPVOID lpBuffer, // データの格納先
@@ -23,6 +25,7 @@ BOOL Hook_ReadFileCustom_BushouKao(
     LPOVERLAPPED lpOverlapped // オーバーラップ構造体のポインタ
 ) {
 
+    // まずは画像データから
     char filenameBuf[512] = "";
     std::string jsOverridePath = callJSModRequestBushouKaoID(nTargetKaoID);
     if (jsOverridePath != "") {
@@ -54,17 +57,27 @@ BOOL Hook_ReadFileCustom_BushouKao(
         return FALSE;
     }
 
-    // 元の画像をコピー
-    if (nNumberOfBytesToRead == buffer.size()) {
-        memcpy(lpBuffer, buffer.data(), buffer.size());
+    memcpy(lpBuffer, buffer.data(), buffer.size());
+
+    // 次にパレット
+    file.seekg(-(KAO_PIC_WIDTH * KAO_PIC_HIGHT) - KAO_PALLETTE_SIZE, std::ios::end);
+
+    std::vector<char> palBuffer(KAO_PALLETTE_SIZE);
+    file.read(palBuffer.data(), palBuffer.size());
+
+    if (file.fail()) {
+        OutputDebugStream("ファイル" + filename + "の読み込みに失敗しました。\n");
+        return FALSE;
     }
 
+    // パレット情報を控えておく。次に読み込みが来た時にパレット情報をコピーするため。
+    memcpy(kaoPalletteBuffer, palBuffer.data(), palBuffer.size());
+    isNextBufferKaoPallette = true;
 
     return TRUE;
 }
 
 
-extern int nTargetKaoPalleteID;
 BOOL Hook_ReadFileCustom_BushouKaoPallette(
     HANDLE hFile, // ファイルのハンドル
     LPVOID lpBuffer, // データの格納先
@@ -72,41 +85,9 @@ BOOL Hook_ReadFileCustom_BushouKaoPallette(
     LPDWORD lpNumberOfBytesRead, // 実際に読み込んだバイト数
     LPOVERLAPPED lpOverlapped // オーバーラップ構造体のポインタ
 ) {
-
-    char filenameBuf[512] = "";
-    std::string jsOverridePath = callJSModRequestBushouKaoID(nTargetKaoPalleteID);
-    if (jsOverridePath != "") {
-        strcpy_s(filenameBuf, jsOverridePath.c_str());
-    }
-    else {
-        sprintf_s(filenameBuf, "OVERRIDE\\DATA\\KAOCG\\%04d.bmp", nTargetKaoPalleteID);
-    }
-
-    std::string filename = filenameBuf;
-    if (!isFileExists(filename)) {
-        return FALSE;
-    }
-
-    std::ifstream file(filename, std::ios::binary);
-
-    if (!file) {
-        OutputDebugStream("ファイル" + filename + "を開くことができませんでした。\n");
-        return FALSE;
-    }
-
-    file.seekg(-(KAO_PIC_WIDTH * KAO_PIC_HIGHT)- KAO_PALLETTE_SIZE, std::ios::end);
-
-    std::vector<char> buffer(KAO_PALLETTE_SIZE);
-    file.read(buffer.data(), buffer.size());
-
-    if (file.fail()) {
-        OutputDebugStream("ファイル" + filename + "の読み込みに失敗しました。\n");
-        return FALSE;
-    }
-
-    // 元の画像をコピー
-    if (nNumberOfBytesToRead == buffer.size()) {
-        memcpy(lpBuffer, buffer.data(), buffer.size());
+    if (isNextBufferKaoPallette) {
+        memcpy(lpBuffer, kaoPalletteBuffer, KAO_PALLETTE_SIZE);
+        isNextBufferKaoPallette = false;
     }
 
 

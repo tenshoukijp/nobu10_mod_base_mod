@@ -16,6 +16,8 @@
 
 
 extern int nTargetKahouGazouID;
+BYTE kahouPalletteBuffer[KAHOU_PALLETTE_SIZE];
+bool isNextBufferKahouPallette = false;
 BOOL Hook_ReadFileCustom_KahouGazou(
     HANDLE hFile, // ファイルのハンドル
     LPVOID lpBuffer, // データの格納先
@@ -24,6 +26,7 @@ BOOL Hook_ReadFileCustom_KahouGazou(
     LPOVERLAPPED lpOverlapped // オーバーラップ構造体のポインタ
 ) {
 
+    // まずは画像データから
     char filenameBuf[512] = "";
     std::string jsOverridePath = callJSModRequestKahouPicID(nTargetKahouGazouID);
     if (jsOverridePath != "") {
@@ -56,11 +59,23 @@ BOOL Hook_ReadFileCustom_KahouGazou(
         return FALSE;
     }
 
-    // 元の画像をコピー
-    if (nNumberOfBytesToRead == buffer.size()) {
-        memcpy(lpBuffer, buffer.data(), buffer.size());
+    memcpy(lpBuffer, buffer.data(), buffer.size());
+
+
+    // 次にパレット
+    file.seekg(-(KAHOU_PIC_WIDTH * KAHOU_PIC_HIGHT) - KAHOU_PALLETTE_SIZE, std::ios::end);
+
+    std::vector<char> bufferPallette(KAHOU_PALLETTE_SIZE);
+    file.read(bufferPallette.data(), bufferPallette.size());
+
+    if (file.fail()) {
+        OutputDebugStream("ファイル" + filename + "の読み込みに失敗しました。\n");
+        return FALSE;
     }
 
+    // パレット情報を控えておく。次に読み込みが来た時にパレット情報をコピーするため。
+    memcpy(kahouPalletteBuffer, bufferPallette.data(), bufferPallette.size());
+    isNextBufferKahouPallette = true;
 
     return TRUE;
 }
@@ -75,43 +90,10 @@ BOOL Hook_ReadFileCustom_KahouGazouPallete(
     LPOVERLAPPED lpOverlapped // オーバーラップ構造体のポインタ
 ) {
 
-    char filenameBuf[512] = "";
-    std::string jsOverridePath = callJSModRequestKahouPicID(nTargetKahouGazouPalleteID);
-    if (jsOverridePath != "") {
-        strcpy_s(filenameBuf, jsOverridePath.c_str());
+    if (isNextBufferKahouPallette) {
+        memcpy(lpBuffer, kahouPalletteBuffer, KAHOU_PALLETTE_SIZE);
+        isNextBufferKahouPallette = false;
     }
-    else {
-        sprintf_s(filenameBuf, "OVERRIDE\\DATA\\KAHOU\\%03d.bmp", nTargetKahouGazouPalleteID);
-    }
-
-    std::string filename = filenameBuf;
-    if (!isFileExists(filename)) {
-        OutputDebugStream("家宝画像ファイルは存在しない" + std::string(filenameBuf));
-        return FALSE;
-    }
-
-    std::ifstream file(filename, std::ios::binary);
-
-    if (!file) {
-        OutputDebugStream("ファイル" + filename + "を開くことができませんでした。\n");
-        return FALSE;
-    }
-
-    file.seekg(-(KAHOU_PIC_WIDTH * KAHOU_PIC_HIGHT) - KAHOU_PALLETTE_SIZE, std::ios::end);
-
-    std::vector<char> buffer(KAHOU_PALLETTE_SIZE);
-    file.read(buffer.data(), buffer.size());
-
-    if (file.fail()) {
-        OutputDebugStream("ファイル" + filename + "の読み込みに失敗しました。\n");
-        return FALSE;
-    }
-
-    // 元の画像をコピー
-    if (nNumberOfBytesToRead == buffer.size()) {
-        memcpy(lpBuffer, buffer.data(), buffer.size());
-    }
-
 
     return TRUE;
 }

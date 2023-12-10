@@ -403,10 +403,8 @@ const int lDistanceToMoveFirstKahouPallette = 549336;// 実際にツクモナスにアクセ
 
 
 int nTargetKaoID = -1;
-int nTargetKaoPalleteID = -1;
 
 int nTargetKahouGazouID = -1;
-int nTargetKahouGazouPalleteID = -1;
 
 
 // extern DWORD Hook_SetFilePointerCustom(HANDLE hFile, LONG lDistanceToMove, PLONG lpDistanceToMoveHigh, DWORD dwMoveMethod);
@@ -432,13 +430,10 @@ DWORD WINAPI Hook_SetFilePointer(
         }
         else if (lDistanceToMoveFirstPallette >= lDistanceToMove) {
             const int header_size = lDistanceToMoveFirstPallette; // 織田信長の1番目のパレット位置を起点として...
-            nTargetKaoPalleteID = (lDistanceToMove - header_size) / (256*4); // パレットは１つあたり4バイト。それが256色分ある
             OutputDebugStream("顔SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
-            OutputDebugStream("顔パレットID:%d\n", nTargetKaoPalleteID);
         }
         else {
             nTargetKaoID = -1;
-            nTargetKaoPalleteID = -1;
         }
     }
     else if (hFileKAHOU == hFile) {
@@ -450,14 +445,11 @@ DWORD WINAPI Hook_SetFilePointer(
         }
         else if (lDistanceToMoveFirstKahouPallette >= lDistanceToMove) {
             const int header_size = lDistanceToMoveFirstKahouPallette; // 家宝画像の1番目のパレット位置を起点として...
-            nTargetKahouGazouPalleteID = (lDistanceToMove - header_size) / (256 * 4); // パレットは１つあたり4バイト。それが256色分ある
             OutputDebugStream("家宝SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
-            OutputDebugStream("家宝パレットID:%d\n", nTargetKahouGazouPalleteID);
 
         }
         else {
             nTargetKahouGazouID = -1;
-            nTargetKahouGazouPalleteID = -1;
         }
     }
     return nResult;
