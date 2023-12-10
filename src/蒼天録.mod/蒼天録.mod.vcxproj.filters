@@ -191,6 +191,60 @@
     <ClCompile Include="hook_textdraw.cpp">
       <Filter>文字列表示</Filter>
     </ClCompile>
+    <ClCompile Include="hook_call_01_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_02_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_03_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_04_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_05_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_06_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_07_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_08_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_09_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_10_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_11_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_12_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_13_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_14_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_16_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_15_textdraw.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_13_textdraw_wrap.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
+    <ClCompile Include="hook_call_13_textdraw_prev.cpp">
+      <Filter>文字列表示</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="dllmain.def">

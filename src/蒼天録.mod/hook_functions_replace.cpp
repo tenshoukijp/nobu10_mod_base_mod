@@ -187,9 +187,10 @@ BOOL WINAPI Hook_ExtTextOutA(
 	UINT cbCount,      // 文字数
 	const INT *lpDx    // 文字間隔配列
 ) {
-	OutputDebugStream("ExtTextOutA:%s\n", lpString);
-    OutputDebugStream("ExtTextOutAdd:%x\n", lpString);
-    OutputDebugStream("関数の場所%x\n", Hook_ExtTextOutA);
+    // ここで直接操作する必要はなくなった。hook_textdraw.cppで操作
+	// OutputDebugStream("ExtTextOutA:%s\n", lpString);
+    // OutputDebugStream("ExtTextOutAdd:%x\n", lpString);
+    // OutputDebugStream("関数の場所%x\n", Hook_ExtTextOutA);
 
 	// 先にカスタムの方を実行。
 	BOOL nResult = ((PFNEXTTEXTOUTA)pfnOrigExtTextOutA)(hdc, nXStart, nYStart, fuOptions, lprc, lpString, cbCount, lpDx);
@@ -284,10 +285,10 @@ HWND WINAPI Hook_CreateWindowExA(
     OutputDebugStream("dwStyle%d", dwStyle);
 
     // ウィンドウ状態をなんとか保つ
-    // HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+    HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
 
     // 元のものを呼び出す
-	HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+	// HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
 
 	return hWnd;
 }

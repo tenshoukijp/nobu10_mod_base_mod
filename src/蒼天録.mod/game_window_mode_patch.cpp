@@ -19,7 +19,8 @@ void WriteAsmJumperOnSSRExeChangeDisplayMode() {
 
 	BYTE *mode = (BYTE *)0x7CEF32; 
 	// *mode = 0x13;
-	char sz[2] = { DDSCL_FULLSCREEN|DDSCL_EXCLUSIVE, 0x00 };
+	// char sz[2] = { DDSCL_FULLSCREEN|DDSCL_EXCLUSIVE, 0x00 };
+	char sz[2] = { DDSCL_NORMAL, 0x00 };
 
 	WriteProcessMemory(hCurrentProcess, (LPVOID)(0x7CEF32), sz, 1, NULL);
 

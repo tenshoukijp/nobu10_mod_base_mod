@@ -40,7 +40,6 @@ using namespace std;
 00552CCD   CALL Nobunaga.007E2E60
 00552CF7   CALL Nobunaga.007E2E60
 007D5141   CALL Nobunaga.007E2E60
-007E2E60   PUSH -1                                   (CPUｳｨﾝﾄﾞｳでの選択箇所)
 007E312E   CALL Nobunaga.007E2E60
 007E31BA   CALL Nobunaga.007E2E60
 007EB954   CALL Nobunaga.007E2E60
@@ -68,20 +67,20 @@ using namespace std;
 int nTextDrawEaxBackup = 0;
 int nTextDrawArg1 = 0;
 int nTextDrawArg2 = 0;
-int nTextDrawArg3 = 0; // これが文字列のアドレス
+int nTextDrawArgTargetString = 0; // これが文字列のアドレス
 int nTextDrawArg4 = 0;
 int nTextDrawArg5 = 0;
 
 void OnSSRExeTextDrawExecute() {
-	OutputDebugStream("TextDrawが通りますよ");
-	OutputDebugStream("nTextDrawArg1%x\n", nTextDrawArg1);
-	OutputDebugStream("nTextDrawArg2%x\n", nTextDrawArg2);
-	OutputDebugStream("nTextDrawArg3%x\n", nTextDrawArg3);
-	if (nTextDrawArg3 != NULL) {
-		OutputDebugStream("★nTextDrawArgSTR%s\n", nTextDrawArg3);
+	if (nTextDrawArgTargetString != NULL && strlen((char *)nTextDrawArgTargetString) > 0) {
+		OutputDebugStream("TextDrawが通りますよ");
+		OutputDebugStream("nTextDrawArg1%x\n", nTextDrawArg1);
+		OutputDebugStream("nTextDrawArg2%x\n", nTextDrawArg2);
+		OutputDebugStream("nTextDrawArg3%x\n", nTextDrawArgTargetString);
+		OutputDebugStream("★nTextDrawArgSTR%s\n", nTextDrawArgTargetString);
+		OutputDebugStream("nTextDrawArg4%x\n", nTextDrawArg4);
+		OutputDebugStream("nTextDrawArg5%x\n", nTextDrawArg5);
 	}
-	OutputDebugStream("nTextDrawArg4%x\n", nTextDrawArg4);
-	OutputDebugStream("nTextDrawArg5%x\n", nTextDrawArg5);
 }
 
 
@@ -110,7 +109,7 @@ __declspec(naked) void WINAPI OnSSRExeTextDraw() {
 		MOV eax, DWORD PTR SS : [ESP + 0x8] // 4番目の引数を取得
 		mov nTextDrawArg4, eax
 		MOV eax, DWORD PTR SS : [ESP + 0xC] // 3番目の引数を取得
-		mov nTextDrawArg3, eax
+		mov nTextDrawArgTargetString, eax
 		MOV eax, DWORD PTR SS : [ESP + 0x10] // 2番目の引数を取得
 		mov nTextDrawArg2, eax
 		MOV eax, DWORD PTR SS : [ESP + 0x14] // 1番目の引数を取得

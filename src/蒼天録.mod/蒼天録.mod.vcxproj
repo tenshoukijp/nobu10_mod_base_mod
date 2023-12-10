@@ -56,6 +56,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/D "_CRT_SECURE_NO_WARNINGS" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -77,6 +78,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <StringPooling>false</StringPooling>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/D "_CRT_SECURE_NO_WARNINGS" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -119,6 +121,24 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="hook_bgm_filename.cpp" />
+    <ClCompile Include="hook_call_01_textdraw.cpp" />
+    <ClCompile Include="hook_call_02_textdraw.cpp" />
+    <ClCompile Include="hook_call_03_textdraw.cpp" />
+    <ClCompile Include="hook_call_04_textdraw.cpp" />
+    <ClCompile Include="hook_call_05_textdraw.cpp" />
+    <ClCompile Include="hook_call_06_textdraw.cpp" />
+    <ClCompile Include="hook_call_07_textdraw.cpp" />
+    <ClCompile Include="hook_call_08_textdraw.cpp" />
+    <ClCompile Include="hook_call_09_textdraw.cpp" />
+    <ClCompile Include="hook_call_10_textdraw.cpp" />
+    <ClCompile Include="hook_call_11_textdraw.cpp" />
+    <ClCompile Include="hook_call_12_textdraw.cpp" />
+    <ClCompile Include="hook_call_13_textdraw.cpp" />
+    <ClCompile Include="hook_call_13_textdraw_prev.cpp" />
+    <ClCompile Include="hook_call_13_textdraw_wrap.cpp" />
+    <ClCompile Include="hook_call_14_textdraw.cpp" />
+    <ClCompile Include="hook_call_15_textdraw.cpp" />
+    <ClCompile Include="hook_call_16_textdraw.cpp" />
     <ClCompile Include="hook_defwindowproca_custom.cpp" />
     <ClCompile Include="hook_functions_direct.cpp" />
     <ClCompile Include="hook_functions_replace.cpp" />

@@ -7,4 +7,4 @@ void OutputDebugStream(std::string strOutputString);
 
 void OutputDebugStream(int number);
 
-void OutputDebugStream(std::wstring strOutputString);
+void OutputDebugStream(const char* format, ...);
