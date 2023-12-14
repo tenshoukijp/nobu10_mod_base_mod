@@ -1,16 +1,25 @@
 #include "output_debug_stream.h"
 
 void OutputDebugStream(std::string strOutputString) {
+#ifdef SUPER_RELEASE
+	return;
+#endif
 	OutputDebugString(strOutputString.c_str());
 }
 
 void OutputDebugStream(int number) {
+#ifdef SUPER_RELEASE
+	return;
+#endif
 	OutputDebugString(std::to_string(number).c_str());
 }
 
 #pragma unmanaged
 char szBufOutputDebugStream[4096] = "";
 void OutputDebugStream(const char* format, ...) {
+#ifdef SUPER_RELEASE
+	return;
+#endif
 
 	int length = sizeof(szBufOutputDebugStream) - 1;
 

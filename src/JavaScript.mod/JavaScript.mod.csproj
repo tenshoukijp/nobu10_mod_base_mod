@@ -34,6 +34,10 @@
     <Reference Include="ClearScript.Core">
       <HintPath>clearscript\ClearScript.Core.dll</HintPath>
     </Reference>
+    <Reference Include="ClearScript.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Release\ClearScript.Json.dll</HintPath>
+    </Reference>
     <Reference Include="ClearScript.V8">
       <HintPath>clearscript\ClearScript.V8.dll</HintPath>
     </Reference>

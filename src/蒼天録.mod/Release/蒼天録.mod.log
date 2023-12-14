@@ -31,9 +31,9 @@ C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\game_data_string_array.c
   hook_readfile_custom_kahou.cpp
   hook_readfile_custom_kao.cpp
   hook_sound_filename.cpp
+C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_sound_filename.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   hook_textdraw.cpp
   javascript_mod.cpp
-C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_sound_filename.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   mng_文字列変換.cpp
   onigwrap.cpp
   output_debug_stream.cpp
