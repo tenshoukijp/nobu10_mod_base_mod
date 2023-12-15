@@ -174,8 +174,8 @@ namespace ゲーム
                     success = Double.TryParse(value.ToString(), out dtmp);
                     if (success)
                     {
-                        // ★★★JScriptエンジンやFirefoxは、%dでは0に近づける方にまるめる
-                        result = (Int32)(dtmp);
+                        // ★★★v8エンジンだと、切り捨て
+                        result = (Int32)Math.Floor(dtmp);
                     }
 
                     else
@@ -204,8 +204,8 @@ namespace ゲーム
                     success = Double.TryParse(value.ToString(), out dtmp);
                     if (success)
                     {
-                        // ★★★JScriptエンジンやFirefoxは、%dでは0に近づける方にまるめる
-                        result = (Int64)(dtmp);
+                        // ★★★v8エンジンだと、切り捨て
+                        result = (Int64)Math.Floor(dtmp);
                     }
                     else
                     {
@@ -299,6 +299,5 @@ namespace ゲーム
 
             return result;
         }
-
     }
 }
