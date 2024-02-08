@@ -45,7 +45,11 @@ int nTextDraw13WrapArg1 = 0;
 int nTextDraw13WrapArg2 = 0;
 
 void OnSSRExeTextDraw13WrapExecute() {
-	// OutputDebugStream("ššššTextDraw13Wrap‚ª—ˆ‚½‚æ!!!š\n");
+	OutputDebugStream("ššššTextDraw13Wrap‚ª—ˆ‚½‚æ!!!š\n");
+	/*
+	OutputDebugStream("ššššnTextDraw13WrapArg1 %xš\n", nTextDraw13WrapArg1);
+	OutputDebugStream("ššššnTextDraw13WrapArg2 %xš\n", nTextDraw13WrapArg2);
+	*/
 }
 
 

@@ -209,7 +209,9 @@
     <Library Include="oniguruma.lib" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

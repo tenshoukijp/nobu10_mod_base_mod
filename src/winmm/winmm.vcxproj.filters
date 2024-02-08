@@ -25,6 +25,9 @@
     <Filter Include="ファイル">
       <UniqueIdentifier>{dfed9243-5b41-4d6f-8c1d-232bf5d3af2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="アンチデバッグ">
+      <UniqueIdentifier>{18738fdd-0098-4c43-9917-e59c6bcdf81e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dllmain.h">
@@ -51,6 +54,9 @@
     <ClInclude Include="file_attribute.h">
       <Filter>ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="loadantidebug.h">
+      <Filter>アンチデバッグ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -73,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="file_attribute.cpp">
       <Filter>ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="loadantidebug.cpp">
+      <Filter>アンチデバッグ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -225,7 +225,7 @@ HFONT WINAPI Hook_CreateFontA(
     HFONT hFont = NULL;
     // ÇlÇr ñæí© Ç»ÇÁ è´êØ ñæí©Ç÷
     if (std::string(pszFaceName) == "ÇlÇr ñæí©") {
-        std::string strOverrideFontName = getNB8FontName();
+        std::string strOverrideFontName = getNB10FontName();
         if (std::string(strOverrideFontName) != "") {
             hFont = ((PFNCREATEFONTA)pfnOrigCreateFontA)(cHeight, cWidth, cEscapement, cOrientation, cWeight, bItalic, bUnderline, bStrikeOut, iCharSet, iOutPrecision, iClipPrecision, iQuality, iPitchAndFamily, strOverrideFontName.c_str());
 			return hFont;
@@ -286,10 +286,10 @@ HWND WINAPI Hook_CreateWindowExA(
     OutputDebugStream("dwStyle%d", dwStyle);
 
     // ÉEÉBÉìÉhÉEèÛë‘ÇÇ»ÇÒÇ∆Ç©ï€Ç¬
-    // HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+    HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(0, lpClassName, lpWindowName, 0, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
 
     // å≥ÇÃÇ‡ÇÃÇåƒÇ—èoÇ∑
-	HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+	// HWND hWnd = ((PFNCREATEWINDOWEXA)pfnOrigCreateWindowExA)(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
 
 	return hWnd;
 }

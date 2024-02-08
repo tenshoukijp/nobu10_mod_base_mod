@@ -1,6 +1,7 @@
 C:\Users\master\source\repos\蒼天録Mod\winmm\dllextern.cpp;C:\Users\master\source\repos\蒼天録Mod\winmm\Release\dllextern.obj
 C:\Users\master\source\repos\蒼天録Mod\winmm\dllmain.cpp;C:\Users\master\source\repos\蒼天録Mod\winmm\Release\dllmain.obj
 C:\Users\master\source\repos\蒼天録Mod\winmm\file_attribute.cpp;C:\Users\master\source\repos\蒼天録Mod\winmm\Release\file_attribute.obj
+C:\Users\master\source\repos\蒼天録Mod\winmm\loadantidebug.cpp;C:\Users\master\source\repos\蒼天録Mod\winmm\Release\loadantidebug.obj
 C:\Users\master\source\repos\蒼天録Mod\winmm\loadmod.cpp;C:\Users\master\source\repos\蒼天録Mod\winmm\Release\loadmod.obj
 C:\Users\master\source\repos\蒼天録Mod\winmm\on_event.cpp;C:\Users\master\source\repos\蒼天録Mod\winmm\Release\on_event.obj
 C:\Users\master\source\repos\蒼天録Mod\winmm\output_debug_stream.cpp;C:\Users\master\source\repos\蒼天録Mod\winmm\Release\output_debug_stream.obj

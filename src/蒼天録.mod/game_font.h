@@ -5,4 +5,4 @@
 
 void onFontInitialize();
 
-std::string getNB8FontName();
+std::string getNB10FontName();

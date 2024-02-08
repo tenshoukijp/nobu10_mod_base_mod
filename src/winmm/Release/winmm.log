@@ -1,6 +1,7 @@
 ﻿  dllextern.cpp
   dllmain.cpp
   file_attribute.cpp
+  loadantidebug.cpp
   loadmod.cpp
   on_event.cpp
   output_debug_stream.cpp
