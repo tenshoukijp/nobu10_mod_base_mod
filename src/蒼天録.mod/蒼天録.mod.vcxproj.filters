@@ -176,9 +176,6 @@
     <ClCompile Include="hook_functions_direct.cpp">
       <Filter>フック関数ダイレクト</Filter>
     </ClCompile>
-    <ClCompile Include="game_window_mode.cpp">
-      <Filter>ウィンドウモード</Filter>
-    </ClCompile>
     <ClCompile Include="hook_movie_filename.cpp">
       <Filter>ムービー</Filter>
     </ClCompile>
@@ -253,6 +250,9 @@
     </ClCompile>
     <ClCompile Include="hook_readfile_custom_kahou.cpp">
       <Filter>フック関数置き換え系</Filter>
+    </ClCompile>
+    <ClCompile Include="game_window_mode.cpp">
+      <Filter>ウィンドウモード</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

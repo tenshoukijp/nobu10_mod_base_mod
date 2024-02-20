@@ -40,7 +40,7 @@ using namespace std;
 007CEEE5   8B45 1C          MOV EAX,DWORD PTR SS:[EBP+1C]
 007CEEE8   8B55 14          MOV EDX,DWORD PTR SS:[EBP+14]
 007CEEEB   8945 18          MOV DWORD PTR SS:[EBP+18],EAX
-007CEEEE   0F84 86010000    JE Nobunaga.007CF07A
+007CEEEE   0F84 86010000    JE Nobunaga.007CF07A                     ← ここ、ウィンドウモードに突入している
 007CEEF4   8B4C24 10        MOV ECX,DWORD PTR SS:[ESP+10]
 007CEEF8   51               PUSH ECX
 007CEEF9   50               PUSH EAX
@@ -348,6 +348,11 @@ using namespace std;
 007CF07A   50               PUSH EAX
 */
 
+/*
+007CEEEB   8945 18          MOV DWORD PTR SS : [EBP + 18] , EAX
+007CEEEE   0F84 86010000    JE Nobunaga.007CF07A                     ← ここ、もしジャンプしたらウィンドウモードにいくと思われる
+007CEEF4   8B4C24 10        MOV ECX, DWORD PTR SS : [ESP + 10]
+*/
 
 void OnSSRExeChangeDisplayModeExecute() {
 	OutputDebugStream("OnSSRExeChangeDisplayModeExecute");
@@ -355,11 +360,12 @@ void OnSSRExeChangeDisplayModeExecute() {
 
 
 /*
-007CF075   E9 F2000000      JMP Nobunaga.007CF16C // ここがあるからウィンドウモードにならないのだと思われる。
-007CF07A   50               PUSH EAX
+007CEEEB   8945 18          MOV DWORD PTR SS : [EBP + 18] , EAX
+007CEEEE   0F84 86010000    JE Nobunaga.007CF07A                     ← ここ、もしジャンプしたらウィンドウモードにいくと思われる、と思ったが、ウィンドウモード自体未完成なのかも
+007CEEF4   8B4C24 10        MOV ECX, DWORD PTR SS : [ESP + 10]
 */
 
-int pSSRExeJumpFromToOnSSRExeChangeDisplayMode = 0x7CF075; // 関数はこのアドレスから、OnSSRExeChangeDisplayModeへとジャンプしてくる。
+int pSSRExeJumpFromToOnSSRExeChangeDisplayMode = 0x7CEEEE; // 関数はこのアドレスから、OnSSRExeChangeDisplayModeへとジャンプしてくる。
 int pSSRExeReturnLblFromOnSSRExeChangeDisplayMode = 0x7CF07A; // 関数が最後までいくと、このTENSHOU.EXE内に直接ジャンプする
 
 #pragma warning(disable:4733)

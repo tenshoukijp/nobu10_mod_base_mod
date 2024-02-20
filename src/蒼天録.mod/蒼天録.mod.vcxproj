@@ -155,7 +155,6 @@
     <ClCompile Include="game_process.cpp" />
     <ClCompile Include="game_window.cpp" />
     <ClCompile Include="game_window_mode.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release (Super)|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="game_window_mode_patch.cpp">
