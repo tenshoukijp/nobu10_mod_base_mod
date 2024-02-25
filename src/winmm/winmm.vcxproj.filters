@@ -16,9 +16,6 @@
     <Filter Include="デバッグ出力">
       <UniqueIdentifier>{6ac47bde-4c32-4a88-b6f1-64e723114401}</UniqueIdentifier>
     </Filter>
-    <Filter Include="将星録Mod">
-      <UniqueIdentifier>{76872a86-5724-45b0-93cf-b443ed4dccd7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="プロセス">
       <UniqueIdentifier>{de08b900-1729-4679-a204-5682d053f2d4}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,9 @@
     </Filter>
     <Filter Include="アンチデバッグ">
       <UniqueIdentifier>{18738fdd-0098-4c43-9917-e59c6bcdf81e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="蒼天録Mod">
+      <UniqueIdentifier>{76872a86-5724-45b0-93cf-b443ed4dccd7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +72,7 @@
       <Filter>デバッグ出力</Filter>
     </ClCompile>
     <ClCompile Include="loadmod.cpp">
-      <Filter>将星録Mod</Filter>
+      <Filter>蒼天録Mod</Filter>
     </ClCompile>
     <ClCompile Include="process.cpp">
       <Filter>プロセス</Filter>
