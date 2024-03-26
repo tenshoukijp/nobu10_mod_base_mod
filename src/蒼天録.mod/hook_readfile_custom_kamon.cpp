@@ -12,13 +12,13 @@
 #include "file_attribute.h"
 
 
-// 顔の画像は幅が96, 高さが120。マジックナンバーになってしまうが、今後変更になったりは永久にしないため、そのまま埋め込む。(そっちの方が定数名使うよりわかりやすい)
+// 顔の画像は幅が16, 高さが16。マジックナンバーになってしまうが、今後変更になったりは永久にしないため、そのまま埋め込む。(そっちの方が定数名使うよりわかりやすい)
 
 
-extern int nTargetKahouGazouID;
-BYTE kamonPalletteBuffer[KAHOU_PALLETTE_SIZE];
-bool isNextBufferKahouPallette = false;
-BOOL Hook_ReadFileCustom_KahouGazou(
+extern int nTargetKamonID;
+BYTE kahouPalletteBuffer[KAMON_PALLETTE_SIZE];
+bool isNextBufferKamonPallette = false;
+BOOL Hook_ReadFileCustom_KamonGazou(
     HANDLE hFile, // ファイルのハンドル
     LPVOID lpBuffer, // データの格納先
     DWORD nNumberOfBytesToRead, // 読み込むバイト数
@@ -28,17 +28,17 @@ BOOL Hook_ReadFileCustom_KahouGazou(
 
     // まずは画像データから
     char filenameBuf[512] = "";
-    std::string jsOverridePath = callJSModRequestKahouPicID(nTargetKahouGazouID);
+    std::string jsOverridePath = callJSModRequestKamonPicID(nTargetKamonID);
     if (jsOverridePath != "") {
         strcpy_s(filenameBuf, jsOverridePath.c_str());
     }
     else {
-        sprintf_s(filenameBuf, "OVERRIDE\\DATA\\KAHOU\\%03d.bmp", nTargetKahouGazouID);
+        sprintf_s(filenameBuf, "OVERRIDE\\DATA\\KAMON\\%03d.bmp", nTargetKamonID);
     }
 
     std::string filename = filenameBuf;
     if (!isFileExists(filename)) {
-        OutputDebugStream("家宝画像ファイルは存在しない" + std::string(filenameBuf));
+        OutputDebugStream("家紋画像ファイルは存在しない" + std::string(filenameBuf));
         return FALSE;
     }
 
@@ -49,9 +49,9 @@ BOOL Hook_ReadFileCustom_KahouGazou(
         return FALSE;
     }
 
-    file.seekg(-(KAHOU_PIC_WIDTH * KAHOU_PIC_HIGHT), std::ios::end);
+    file.seekg(-(KAMON_PIC_WIDTH * KAMON_PIC_HIGHT), std::ios::end);
 
-    std::vector<char> buffer(KAHOU_PIC_WIDTH * KAHOU_PIC_HIGHT);
+    std::vector<char> buffer(KAMON_PIC_WIDTH * KAMON_PIC_HIGHT);
     file.read(buffer.data(), buffer.size());
 
     if (file.fail()) {
@@ -63,9 +63,9 @@ BOOL Hook_ReadFileCustom_KahouGazou(
 
 
     // 次にパレット
-    file.seekg(-(KAHOU_PIC_WIDTH * KAHOU_PIC_HIGHT) - KAHOU_PALLETTE_SIZE, std::ios::end);
+    file.seekg(-(KAMON_PIC_WIDTH * KAMON_PIC_HIGHT) - KAMON_PALLETTE_SIZE, std::ios::end);
 
-    std::vector<char> bufferPallette(KAHOU_PALLETTE_SIZE);
+    std::vector<char> bufferPallette(KAMON_PALLETTE_SIZE);
     file.read(bufferPallette.data(), bufferPallette.size());
 
     if (file.fail()) {
@@ -74,15 +74,15 @@ BOOL Hook_ReadFileCustom_KahouGazou(
     }
 
     // パレット情報を控えておく。次に読み込みが来た時にパレット情報をコピーするため。
-    memcpy(kamonPalletteBuffer, bufferPallette.data(), bufferPallette.size());
-    isNextBufferKahouPallette = true;
+    memcpy(kahouPalletteBuffer, bufferPallette.data(), bufferPallette.size());
+    isNextBufferKamonPallette = true;
 
     return TRUE;
 }
 
 
-extern int nTargetKahouGazouPalleteID;
-BOOL Hook_ReadFileCustom_KahouGazouPallete(
+extern int nTargetKamonGazouPalleteID;
+BOOL Hook_ReadFileCustom_KamonGazouPallete(
     HANDLE hFile, // ファイルのハンドル
     LPVOID lpBuffer, // データの格納先
     DWORD nNumberOfBytesToRead, // 読み込むバイト数
@@ -90,9 +90,9 @@ BOOL Hook_ReadFileCustom_KahouGazouPallete(
     LPOVERLAPPED lpOverlapped // オーバーラップ構造体のポインタ
 ) {
 
-    if (isNextBufferKahouPallette) {
-        memcpy(lpBuffer, kamonPalletteBuffer, KAHOU_PALLETTE_SIZE);
-        isNextBufferKahouPallette = false;
+    if (isNextBufferKamonPallette) {
+        memcpy(lpBuffer, kahouPalletteBuffer, KAMON_PALLETTE_SIZE);
+        isNextBufferKamonPallette = false;
     }
 
     return TRUE;

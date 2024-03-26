@@ -332,6 +332,7 @@ using PFNCREATEFILEA = HANDLE(WINAPI*)(LPCSTR, DWORD, DWORD, LPSECURITY_ATTRIBUT
 
 HANDLE hFileKAOCG = NULL;
 HANDLE hFileKAHOU = NULL;
+HANDLE hFileKAMON = NULL;
 
 
 PROC pfnOrigCreateFileA = GetProcAddress(GetModuleHandleA("kernel32.dll"), "CreateFileA");
@@ -382,6 +383,10 @@ HANDLE WINAPI Hook_CreateFileA(
         OutputDebugStream("Å°CreateFileA:" + std::string(lpFileName) + "\n");
         hFileKAHOU = nResult;
     }
+    else if (filename == "DATA/KAMON.NBX") {
+        OutputDebugStream("Å°CreateFileA:" + std::string(lpFileName) + "\n");
+        hFileKAMON = nResult;
+    }
 
 
 
@@ -402,11 +407,15 @@ const int lDistanceToMoveFirstPallette = 25281992;// é¿ç€Ç…êDìcêMí∑Ç…ÉAÉNÉZÉXÇµÇ
 const int lDistanceToMoveFirstKahouPic = 1676; // é¿ç€Ç…ÉcÉNÉÇÉiÉXÇ…ÉAÉNÉZÉXÇµÇΩéûÇÃlDistanceToMoveÇÃílÇÊÇË
 const int lDistanceToMoveFirstKahouPallette = 549336;// é¿ç€Ç…ÉcÉNÉÇÉiÉXÇ…ÉAÉNÉZÉXÇµÇΩéûÇÃlDistanceToMoveÇÃílÇÊÇË
 
+const int lDistanceToMoveFirstKamonPic = 10080; // é¿ç€Ç…ç≈èâÇÃâ∆ñ‰Ç…ÉAÉNÉZÉXÇµÇΩéûÇÃlDistanceToMoveÇÃílÇÊÇË
+const int lDistanceToMoveFirstKamonPallette = 71384; // é¿ç€Ç…ç≈èâÇÃâ∆ñ‰Ç…ÉAÉNÉZÉXÇµÇΩéûÇÃlDistanceToMoveÇÃílÇÊÇË
+
 
 int nTargetKaoID = -1;
 
 int nTargetKahouGazouID = -1;
 
+int nTargetKamonID = -1;
 
 // extern DWORD Hook_SetFilePointerCustom(HANDLE hFile, LONG lDistanceToMove, PLONG lpDistanceToMoveHigh, DWORD dwMoveMethod);
 DWORD WINAPI Hook_SetFilePointer(
@@ -453,6 +462,23 @@ DWORD WINAPI Hook_SetFilePointer(
             nTargetKahouGazouID = -1;
         }
     }
+    else if (hFileKAMON == hFile) {
+        if (lDistanceToMoveFirstKamonPic <= lDistanceToMove && lDistanceToMove < lDistanceToMoveFirstKamonPallette) {
+            const int header_size = lDistanceToMoveFirstKamonPic; // ç≈èâÇÃ1î‘ñ⁄ÇÃâÊëúÇ‹Ç≈Ç™ÉwÉbÉ_Å[ÉtÉ@ÉCÉã
+            nTargetKamonID = (lDistanceToMove - header_size) / (KAMON_PIC_WIDTH * KAMON_PIC_WIDTH);
+            OutputDebugStream("â∆ñ‰SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            OutputDebugStream("â∆ñ‰âÊëúID:%d\n", nTargetKamonID);
+        }
+        else if (lDistanceToMoveFirstKamonPallette >= lDistanceToMove) {
+            const int header_size = lDistanceToMoveFirstKahouPallette; // â∆ñÂâÊëúÇÃ1î‘ñ⁄ÇÃÉpÉåÉbÉgà íuÇãNì_Ç∆ÇµÇƒ...
+            OutputDebugStream("â∆ñ‰SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+
+        }
+        else {
+			nTargetKamonID = -1;
+		}
+    }
+
     return nResult;
 }
 
@@ -467,6 +493,8 @@ extern BOOL Hook_ReadFileCustom_BushouKao(HANDLE hFile, LPVOID lpBuffer, DWORD n
 extern BOOL Hook_ReadFileCustom_BushouKaoPallette(HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
 extern BOOL Hook_ReadFileCustom_KahouGazou(HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
 extern BOOL Hook_ReadFileCustom_KahouGazouPallete(HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
+extern BOOL Hook_ReadFileCustom_KamonGazou(HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
+extern BOOL Hook_ReadFileCustom_KamonGazouPallete(HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead, LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
 
 BOOL WINAPI Hook_ReadFile(
     HANDLE hFile, // ÉtÉ@ÉCÉãÇÃÉnÉìÉhÉã
@@ -499,7 +527,17 @@ BOOL WINAPI Hook_ReadFile(
             Hook_ReadFileCustom_KahouGazou(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
         }
     }
-
+    else if (hFileKAMON == hFile) {
+        if (nTargetKamonID == -1) { nTargetKamonID = 0; } // ç≈èâÇÃì«Ç›éÊÇË
+        if (nNumberOfBytesToRead == 1024) {
+            OutputDebugStream("â∆ñ‰ì«Ç›çûÇﬁÉoÉCÉgêî%d, %d\n", nNumberOfBytesToRead, nTargetKamonID);
+            Hook_ReadFileCustom_KamonGazouPallete(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
+        }
+        else if (nNumberOfBytesToRead == (KAMON_PIC_HIGHT * KAMON_PIC_WIDTH)) {
+            OutputDebugStream("â∆ñ‰ì«Ç›çûÇﬁÉoÉCÉgêî%d\n", nNumberOfBytesToRead, nTargetKamonID);
+            Hook_ReadFileCustom_KamonGazou(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
+        }
+    }
     return nResult;
 }
 

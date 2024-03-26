@@ -254,6 +254,9 @@
     <ClCompile Include="game_window_mode.cpp">
       <Filter>ウィンドウモード</Filter>
     </ClCompile>
+    <ClCompile Include="hook_readfile_custom_kamon.cpp">
+      <Filter>フック関数置き換え系</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="dllmain.def">

@@ -19,4 +19,7 @@ std::string callJSModRequestBushouKaoID(int iKaoID);
 
 std::string callJSModRequestKahouPicID(int iPicID);
 
+std::string callJSModRequestKamonPicID(int iKamonID);
+
+
 
