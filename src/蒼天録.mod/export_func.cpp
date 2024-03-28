@@ -33,6 +33,3 @@ extern "C" __declspec(dllexport) void WINAPI onInitialize(void* bufOfNB10Wnd) {
 	OutputDebugStream("onInitialize\r\n");
 }
 
-extern "C" __declspec(dllexport) void WINAPI onMmioOpenA(char* pszFileName, char* bufOverrideFileName) {
-	callJSModMmioOpenA(pszFileName, bufOverrideFileName);
-}

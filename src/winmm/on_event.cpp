@@ -13,11 +13,6 @@ void onInitialize() {
     Mod_onInitialize();
 }
 
-void onMmioOpenA(char* pszFileName, char* bufOverrideFileName) {
-    Mod_onMmioOpenA(pszFileName, bufOverrideFileName);
-}
-
-
 void onFinalize() {
     freeNB10Mod();
 }

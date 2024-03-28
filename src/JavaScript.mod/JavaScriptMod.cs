@@ -79,32 +79,32 @@ public class IJavaScriptMod
         ゲーム.StaticLib.onメインウィンドウ破棄前();
     }
 
-    public static String onRequestBGM(String filepath)
+    public static String on音楽要求時(String filepath)
     {
-        return ゲーム.StaticLib.onRequest音楽(filepath);
+        return ゲーム.StaticLib.on音楽要求時(filepath);
     }
 
-    public static String onRequestSound(String filepath)
+    public static String on効果音要求時(String filepath)
     {
-        return ゲーム.StaticLib.onRequest効果音(filepath);
+        return ゲーム.StaticLib.on効果音要求時(filepath);
     }
-    public static String onRequestFile(String filepath)
+    public static String onファイル要求時(String filepath)
     {
-        return ゲーム.StaticLib.onRequestファイル(filepath);
-    }
-
-    public static String onRequestKaoID(int KaoID)
-    {
-        return ゲーム.StaticLib.onRequest顔画像(KaoID);
-    }
-    public static String onRequestKahouPicID(int PicID)
-    {
-        return ゲーム.StaticLib.onRequest家宝画像(PicID);
+        return ゲーム.StaticLib.onファイル要求時(filepath);
     }
 
-    public static String onRequestKamonPicID(int PicID)
+    public static String on顔画像要求時(int KaoID)
     {
-        return ゲーム.StaticLib.onRequest家紋画像(PicID);
+        return ゲーム.StaticLib.on顔画像要求時(KaoID);
+    }
+    public static String on家宝画像要求時(int PicID)
+    {
+        return ゲーム.StaticLib.on家宝画像要求時(PicID);
+    }
+
+    public static String on家紋画像要求時(int PicID)
+    {
+        return ゲーム.StaticLib.on家紋画像要求時(PicID);
     }
 
 }
@@ -266,6 +266,25 @@ namespace ゲーム
             }
         }
 
+        public static void onメインウィンドウ破棄前()
+        {
+            if (engine != null)
+            {
+                try
+                {
+                    dynamic ret = new ExpandoObject();
+                    dynamic arg = new ExpandoObject();
+                    engine.Script.onメインウィンドウ破棄前(arg, ret);
+                }
+                catch (Exception e)
+                {
+                    OutputDebugStream("onメインウィンドウ破棄前Error:" + e.Message);
+                }
+            }
+            DestroyEngine();
+        }
+
+
         public static String onフォント要求時()
         {
             try
@@ -290,13 +309,14 @@ namespace ゲーム
             return "";
         }
 
-        public static String onRequest音楽(String filepath)
+        public static String on音楽要求時(String filepath)
         {
             try
             {
-                dynamic jsObject = new ExpandoObject();
-                jsObject.ファイル名 = filepath;
-                dynamic ret = engine.Script.onRequest音楽(jsObject);
+                dynamic arg = new ExpandoObject();
+                dynamic ret = new ExpandoObject();
+                arg.ファイル名 = filepath;
+                engine.Script.on音楽要求時(arg, ret);
                 if (ret is Undefined)
                 {
                     return "";
@@ -309,18 +329,19 @@ namespace ゲーム
             }
             catch (Exception e)
             {
-                OutputDebugStream("onRequest音楽Error:" + e.Message);
+                OutputDebugStream("on音楽要求時Error:" + e.Message);
             }
             return "";
         }
 
-        public static String onRequest効果音(String filepath)
+        public static String on効果音要求時(String filepath)
         {
             try
             {
-                dynamic jsObject = new ExpandoObject();
-                jsObject.ファイル名 = filepath;
-                dynamic ret = engine.Script.onRequest効果音(jsObject);
+                dynamic arg = new ExpandoObject();
+                dynamic ret = new ExpandoObject();
+                arg.ファイル名 = filepath;
+                engine.Script.on効果音要求時(arg, ret);
                 if (ret is Undefined)
                 {
                     return "";
@@ -333,18 +354,19 @@ namespace ゲーム
             }
             catch (Exception e)
             {
-                OutputDebugStream("onRequest効果音Error:" + e.Message);
+                OutputDebugStream("on効果音要求時Error:" + e.Message);
             }
             return "";
         }
 
-        public static String onRequest顔画像(int iKaoID)
+        public static String on顔画像要求時(int iKaoID)
         {
             try
             {
-                dynamic jsObject = new ExpandoObject();
-                jsObject.画像番号 = iKaoID;
-                dynamic ret = engine.Script.onRequest顔画像(jsObject);
+                dynamic arg = new ExpandoObject();
+                dynamic ret = new ExpandoObject();
+                arg.画像番号 = iKaoID;
+                engine.Script.on顔画像要求時(arg, ret);
                 if (ret is Undefined)
                 {
                     return "";
@@ -357,18 +379,19 @@ namespace ゲーム
             }
             catch (Exception e)
             {
-                OutputDebugStream("onRequest顔画像Error:" + e.Message);
+                OutputDebugStream("on顔画像要求時Error:" + e.Message);
             }
             return "";
         }
 
-        public static String onRequest家宝画像(int iKahouPicID)
+        public static String on家宝画像要求時(int iKahouPicID)
         {
             try
             {
-                dynamic jsObject = new ExpandoObject();
-                jsObject.画像番号 = iKahouPicID;
-                dynamic ret = engine.Script.onRequest家宝画像(jsObject);
+                dynamic arg = new ExpandoObject();
+                dynamic ret = new ExpandoObject();
+                arg.画像番号 = iKahouPicID;
+                engine.Script.on家宝画像要求時(arg, ret);
                 if (ret is Undefined)
                 {
                     return "";
@@ -381,18 +404,19 @@ namespace ゲーム
             }
             catch (Exception e)
             {
-                OutputDebugStream("onRequest家宝画像Error:" + e.Message);
+                OutputDebugStream("on家宝画像要求時Error:" + e.Message);
             }
             return "";
         }
 
-        public static String onRequest家紋画像(int iKamonID)
+        public static String on家紋画像要求時(int iKamonID)
         {
             try
             {
-                dynamic jsObject = new ExpandoObject();
-                jsObject.画像番号 = iKamonID;
-                dynamic ret = engine.Script.onRequest家紋画像(jsObject);
+                dynamic arg = new ExpandoObject();
+                dynamic ret = new ExpandoObject();
+                arg.画像番号 = iKamonID;
+                engine.Script.on家紋画像要求時(arg);
                 if (ret is Undefined)
                 {
                     return "";
@@ -405,20 +429,21 @@ namespace ゲーム
             }
             catch (Exception e)
             {
-                OutputDebugStream("onRequest家紋画像Error:" + e.Message);
+                OutputDebugStream("on家紋画像要求時Error:" + e.Message);
             }
             return "";
         }
 
 
 
-        public static String onRequestファイル(string filename)
+        public static String onファイル要求時(string filename)
         {
             try
             {
-                dynamic jsObject = new ExpandoObject();
-                jsObject.ファイル名 = filename;
-                dynamic ret = engine.Script.onRequestファイル(jsObject);
+                dynamic arg = new ExpandoObject();
+                dynamic ret = new ExpandoObject();
+                arg.ファイル名 = filename;
+                engine.Script.onファイル要求時(arg, ret);
                 if (ret is Undefined)
                 {
                     return "";
@@ -432,7 +457,7 @@ namespace ゲーム
             }
             catch (Exception e)
             {
-                OutputDebugStream("onRequestファイルError:" + e.Message);
+                OutputDebugStream("onファイル要求時Error:" + e.Message);
             }
             return "";
         }
@@ -571,24 +596,6 @@ namespace ゲーム
                 OutputDebugStream("DoFileError:" + e.Message);
             }
             return false;
-        }
-
-        public static void onメインウィンドウ破棄前()
-        {
-            if (engine != null)
-            {
-                try
-                {
-                    dynamic ret = new ExpandoObject();
-                    dynamic arg = new ExpandoObject();
-                    engine.Script.onメインウィンドウ破棄前(arg, ret);
-                }
-                catch (Exception e)
-                {
-                    OutputDebugStream("onメインウィンドウ破棄前Error:" + e.Message);
-                }
-            }
-            DestroyEngine();
         }
 
         private static void DestroyEngine()
