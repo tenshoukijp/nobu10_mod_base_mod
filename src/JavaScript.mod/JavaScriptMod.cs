@@ -65,18 +65,18 @@ internal class DllAssemblyResolver
 
 public class IJavaScriptMod
 {
-    public static void onCreateWindow(int hWnd)
+    public static void onメインウィンドウ生成後(int hWnd)
     {
-        ゲーム.StaticLib.onCreateメインウィンドウ(hWnd);
+        ゲーム.StaticLib.onメインウィンドウ生成後(hWnd);
     }
 
-    public static String onRequestFont()
+    public static String onフォント要求時()
     {
-        return ゲーム.StaticLib.onRequestフォント();
+        return ゲーム.StaticLib.onフォント要求時();
     }
-    public static void onDestroyWindow()
+    public static void onメインウィンドウ破棄前()
     {
-        ゲーム.StaticLib.onDestroyメインウィンドウ();
+        ゲーム.StaticLib.onメインウィンドウ破棄前();
     }
 
     public static String onRequestBGM(String filepath)
@@ -250,26 +250,29 @@ namespace ゲーム
             OutputDebugStream(joind);
         }
 
-        public static void onCreateメインウィンドウ(int hWnd)
+        public static void onメインウィンドウ生成後(int hWnd)
         {
             try
             {
                 DoFile("JavaScript.mod.js");
-                dynamic jsObject = new ExpandoObject();
-                jsObject.ウィンドウハンドル = hWnd;
-                engine.Script.onCreateメインウィンドウ(jsObject);
+                dynamic arg = new ExpandoObject();
+                dynamic ret = new ExpandoObject();
+                arg.ウィンドウハンドル = hWnd;
+                engine.Script.onメインウィンドウ生成後(arg, ret);
             }
             catch (Exception e)
             {
-                OutputDebugStream("onCreateメインウィンドウError:" + e.Message);
+                OutputDebugStream("onメインウィンドウ生成後Error:" + e.Message);
             }
         }
 
-        public static String onRequestフォント()
+        public static String onフォント要求時()
         {
             try
             {
-                dynamic ret = engine.Script.onRequestフォント();
+                dynamic ret = new ExpandoObject();
+                dynamic arg = new ExpandoObject();
+                engine.Script.onフォント要求時(arg, ret);
                 if (ret is Undefined) {
                     return "";
                 }
@@ -282,7 +285,7 @@ namespace ゲーム
             }
             catch (Exception e)
             {
-                OutputDebugStream("onRequestフォントError:" + e.Message);
+                OutputDebugStream("onフォント要求時Error:" + e.Message);
             }
             return "";
         }
@@ -570,17 +573,19 @@ namespace ゲーム
             return false;
         }
 
-        public static void onDestroyメインウィンドウ()
+        public static void onメインウィンドウ破棄前()
         {
             if (engine != null)
             {
                 try
                 {
-                    engine.Script.onDestroyメインウィンドウ();
+                    dynamic ret = new ExpandoObject();
+                    dynamic arg = new ExpandoObject();
+                    engine.Script.onメインウィンドウ破棄前(arg, ret);
                 }
                 catch (Exception e)
                 {
-                    OutputDebugStream("onDestroyメインウィンドウError:" + e.Message);
+                    OutputDebugStream("onメインウィンドウ破棄前Error:" + e.Message);
                 }
             }
             DestroyEngine();

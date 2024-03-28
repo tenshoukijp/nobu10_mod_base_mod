@@ -435,12 +435,12 @@ DWORD WINAPI Hook_SetFilePointer(
             const int header_size = lDistanceToMoveFirstFace; // 織田信長の1番目の画像までがヘッダーファイル
 
             nTargetKaoID = (lDistanceToMove - header_size) / (KAO_PIC_WIDTH * KAO_PIC_HIGHT);
-            OutputDebugStream("顔SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
-            OutputDebugStream("顔ID:%d\n", nTargetKaoID);
+            // OutputDebugStream("顔SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            // OutputDebugStream("顔ID:%d\n", nTargetKaoID);
         }
         else if (lDistanceToMoveFirstPallette >= lDistanceToMove) {
             const int header_size = lDistanceToMoveFirstPallette; // 織田信長の1番目のパレット位置を起点として...
-            OutputDebugStream("顔SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            // OutputDebugStream("顔SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
         }
         else {
             nTargetKaoID = -1;
@@ -450,12 +450,12 @@ DWORD WINAPI Hook_SetFilePointer(
         if (lDistanceToMoveFirstKahouPic <= lDistanceToMove && lDistanceToMove < lDistanceToMoveFirstKahouPallette) {
             const int header_size = lDistanceToMoveFirstKahouPic; // ツクモナスの1番目の画像までがヘッダーファイル
             nTargetKahouGazouID = (lDistanceToMove - header_size) / (KAHOU_PIC_WIDTH * KAHOU_PIC_HIGHT);
-            OutputDebugStream("家宝SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
-            OutputDebugStream("家宝画像ID:%d\n", nTargetKahouGazouID);
+            // OutputDebugStream("家宝SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            // OutputDebugStream("家宝画像ID:%d\n", nTargetKahouGazouID);
         }
         else if (lDistanceToMoveFirstKahouPallette >= lDistanceToMove) {
             const int header_size = lDistanceToMoveFirstKahouPallette; // 家宝画像の1番目のパレット位置を起点として...
-            OutputDebugStream("家宝SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            // OutputDebugStream("家宝SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
 
         }
         else {
@@ -466,12 +466,12 @@ DWORD WINAPI Hook_SetFilePointer(
         if (lDistanceToMoveFirstKamonPic <= lDistanceToMove && lDistanceToMove < lDistanceToMoveFirstKamonPallette) {
             const int header_size = lDistanceToMoveFirstKamonPic; // 最初の1番目の画像までがヘッダーファイル
             nTargetKamonID = (lDistanceToMove - header_size) / (KAMON_PIC_WIDTH * KAMON_PIC_WIDTH);
-            OutputDebugStream("家紋SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
-            OutputDebugStream("家紋画像ID:%d\n", nTargetKamonID);
+            // OutputDebugStream("家紋SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            // OutputDebugStream("家紋画像ID:%d\n", nTargetKamonID);
         }
         else if (lDistanceToMoveFirstKamonPallette >= lDistanceToMove) {
             const int header_size = lDistanceToMoveFirstKahouPallette; // 家門画像の1番目のパレット位置を起点として...
-            OutputDebugStream("家紋SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
+            // OutputDebugStream("家紋SetFilePointer:" + std::to_string(lDistanceToMove) + "\n");
 
         }
         else {
@@ -509,32 +509,32 @@ BOOL WINAPI Hook_ReadFile(
 
     if (hFileKAOCG == hFile) {
         if (nNumberOfBytesToRead == 1024) {
-            OutputDebugStream("■読み込むバイト数%d\n", nNumberOfBytesToRead);
+            // OutputDebugStream("■読み込むバイト数%d\n", nNumberOfBytesToRead);
             Hook_ReadFileCustom_BushouKaoPallette(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
 
         } else if(nNumberOfBytesToRead == (KAO_PIC_HIGHT*KAO_PIC_WIDTH)) {
-			OutputDebugStream("■読み込むバイト数%d\n", nNumberOfBytesToRead);
+            // OutputDebugStream("■読み込むバイト数%d\n", nNumberOfBytesToRead);
 			Hook_ReadFileCustom_BushouKao(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
 		}
     }
     else if (hFileKAHOU == hFile) {
         if (nNumberOfBytesToRead == 1024) {
-            OutputDebugStream("家宝読み込むバイト数%d\n", nNumberOfBytesToRead);
+            // OutputDebugStream("家宝読み込むバイト数%d\n", nNumberOfBytesToRead);
             Hook_ReadFileCustom_KahouGazouPallete(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
         }
         else if (nNumberOfBytesToRead == (KAHOU_PIC_HIGHT * KAHOU_PIC_WIDTH)) {
-            OutputDebugStream("家宝読み込むバイト数%d\n", nNumberOfBytesToRead);
+            // OutputDebugStream("家宝読み込むバイト数%d\n", nNumberOfBytesToRead);
             Hook_ReadFileCustom_KahouGazou(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
         }
     }
     else if (hFileKAMON == hFile) {
         if (nTargetKamonID == -1) { nTargetKamonID = 0; } // 最初の読み取り
         if (nNumberOfBytesToRead == 1024) {
-            OutputDebugStream("家紋読み込むバイト数%d, %d\n", nNumberOfBytesToRead, nTargetKamonID);
+            // OutputDebugStream("家紋読み込むバイト数%d, %d\n", nNumberOfBytesToRead, nTargetKamonID);
             Hook_ReadFileCustom_KamonGazouPallete(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
         }
         else if (nNumberOfBytesToRead == (KAMON_PIC_HIGHT * KAMON_PIC_WIDTH)) {
-            OutputDebugStream("家紋読み込むバイト数%d\n", nNumberOfBytesToRead, nTargetKamonID);
+            // OutputDebugStream("家紋読み込むバイト数%d\n", nNumberOfBytesToRead, nTargetKamonID);
             Hook_ReadFileCustom_KamonGazou(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
         }
     }

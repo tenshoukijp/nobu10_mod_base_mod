@@ -1,13 +1,13 @@
-C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\obj\Release\JavaScript.mod.csproj.AssemblyReference.cache
-C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\obj\Release\JavaScript.mod.csproj.CoreCompileInputs.cache
 C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\bin\Release\JavaScript.mod.dll
 C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\bin\Release\JavaScript.mod.pdb
 C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\bin\Release\ClearScript.Core.dll
 C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\bin\Release\ClearScript.V8.dll
 C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\bin\Release\Newtonsoft.Json.dll
 C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\bin\Release\ClearScript.V8.ICUData.dll
-C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\obj\Release\JavaScript.mod.dll
-C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\obj\Release\JavaScript.mod.pdb
 C:\Users\master\source\repos\蒼天録Mod\Release\JavaScript.mod.dll
 C:\Users\master\source\repos\蒼天録Mod\Release\JavaScript.mod.pdb
+C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\obj\Release\JavaScript.mod.csproj.AssemblyReference.cache
+C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\obj\Release\JavaScript.mod.csproj.CoreCompileInputs.cache
 C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\obj\Release\JavaScri.F5F43F49.Up2Date
+C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\obj\Release\JavaScript.mod.dll
+C:\Users\master\source\repos\蒼天録Mod\JavaScript.mod\obj\Release\JavaScript.mod.pdb

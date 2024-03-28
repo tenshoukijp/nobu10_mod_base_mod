@@ -5,17 +5,17 @@
 #include "mng_文字列変換.h"
 
 void callJSModCreateWindow(HWND hWnd) {
-	IJavaScriptMod::onCreateWindow((int)hWnd);
+	IJavaScriptMod::onメインウィンドウ生成後((int)hWnd);
 }
 
 std::string callJSModRequestFont() {
-	System::String^ fontname = IJavaScriptMod::onRequestFont();
+	System::String^ fontname = IJavaScriptMod::onフォント要求時();
 	if (System::String::IsNullOrEmpty(fontname)) { return ""; }
 	return to_native_string(fontname);
 }
 
 void callJSModDestroyWindow() {
-	IJavaScriptMod::onDestroyWindow();
+	IJavaScriptMod::onメインウィンドウ破棄前();
 }
 
 void callJSModMmioOpenA(char* pszFileName, char* bufOverrideFileName) {
