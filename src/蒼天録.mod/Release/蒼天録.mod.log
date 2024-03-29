@@ -14,7 +14,6 @@
   hook_call_06_textdraw.cpp
   hook_call_07_textdraw.cpp
   hook_call_08_textdraw.cpp
-C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\game_data_string_array.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   hook_call_09_textdraw.cpp
   hook_call_10_textdraw.cpp
   hook_call_11_textdraw.cpp
@@ -33,7 +32,6 @@ C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\game_data_string_array.c
   hook_readfile_custom_kamon.cpp
   hook_readfile_custom_kao.cpp
   hook_sound_filename.cpp
-C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_sound_filename.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   hook_textdraw.cpp
   javascript_mod.cpp
   mng_文字列変換.cpp
@@ -42,7 +40,5 @@ C:\Users\master\source\repos\蒼天録Mod\蒼天録.mod\hook_sound_filename.cpp(
   .NETFramework,Version=v4.8.AssemblyAttributes.cpp
      ライブラリ C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.lib とオブジェクト C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.exp を作成中
 LINK : warning LNK4232: 名前 蒼天録.mod に ASCII 文字以外の文字が含まれています。932 以外の ANSI コードページを使用すると、DLL をシステムに読み込めない可能性があります
-蒼天録.mod.exp : warning LNK4070: .EXP 内の /OUT:蒼天録.mod ディレクティブの指定が出力ファイル名 'C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll' と異なっています。ディレクティブは無視されます。
-  LINK : /LTCG が指定されましたが、コードの生成は必要ありません。リンク コマンド ラインから /LTCG を削除し、リンカーの性能を改善してください。
 蒼天録.mod.exp : warning LNK4070: .EXP 内の /OUT:蒼天録.mod ディレクティブの指定が出力ファイル名 'C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll' と異なっています。ディレクティブは無視されます。
   蒼天録.mod.vcxproj -> C:\Users\master\source\repos\蒼天録Mod\Release\蒼天録.mod.dll
