@@ -59,7 +59,7 @@ void OnSSRExeMovieFileNameExecute() {
 */
 
 int pSSRExeJumpFromToOnSSRExeMovieFileName = 0x4B0643; // 関数はこのアドレスから、OnSSRExeMovieFileNameへとジャンプしてくる。
-int pSSRExeReturnLblFromOnSSRExeMovieFileName = 0x4B064A; // 関数が最後までいくと、このTENSHOU.EXE内に直接ジャンプする
+int pSSRExeReturnLblFromOnSSRExeMovieFileName = 0x4B064A; // 関数が最後までいくと、この実行exe内に直接ジャンプする
 
 #pragma warning(disable:4733)
 
@@ -113,7 +113,7 @@ void WriteAsmJumperOnSSRExeMovieFileName() {
 	// ５というのは、0046C194  -E9 ????????  JMP TSMod.OnTSExeGetDaimyoKoukeishaBushouID  の命令に必要なバイト数。要するに５バイト足すと次のニーモニック命令群に移動するのだ。そしてそこからの差分がジャンプする際の目的格として利用される。
 	memcpy(cmdOnSSRExeJumpFromMovieFileName + 1, &SubAddress, 4); // +1 はE9の次から4バイト分書き換えるから。
 
-	// 構築したニーモニック命令をTENSHOU.EXEのメモリに書き換える
+	// 構築したニーモニック命令を実行exeのメモリに書き換える
 	WriteProcessMemory(hCurrentProcess, (LPVOID)(pSSRExeJumpFromToOnSSRExeMovieFileName), cmdOnSSRExeJumpFromMovieFileName, 7, NULL);
 	//7バイトのみ書き込む
 	// 004B0291   8B3485 209B9200  MOV ESI,DWORD PTR DS:[EAX*4+929B20]　が 7バイトあるので綺麗に書き換えておく

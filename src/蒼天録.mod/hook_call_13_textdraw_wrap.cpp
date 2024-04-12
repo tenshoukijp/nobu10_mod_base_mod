@@ -61,7 +61,7 @@ void OnSSRExeTextDraw13WrapExecute() {
 */
 
 int pSSRExeJumpFromToOnSSRExeTextDraw13Wrap = 0x7EC140; // 関数はこのアドレスから、OnSSRExeTextDraw13Wrapへとジャンプしてくる。
-int pSSRExeReturnLblFromOnSSRExeTextDraw13Wrap = 0x7EC147; // 関数が最後までいくと、このTENSHOU.EXE内に直接ジャンプする
+int pSSRExeReturnLblFromOnSSRExeTextDraw13Wrap = 0x7EC147; // 関数が最後までいくと、この実行exe内に直接ジャンプする
 
 #pragma warning(disable:4733)
 
@@ -123,7 +123,7 @@ void WriteAsmJumperOnSSRExeTextDraw13Wrap() {
 	// ５というのは、0046C194  -E9 ????????  JMP TSMod.OnTSExeGetDaimyoKoukeishaBushouID  の命令に必要なバイト数。要するに５バイト足すと次のニーモニック命令群に移動するのだ。そしてそこからの差分がジャンプする際の目的格として利用される。
 	memcpy(cmdOnSSRExeJumpFromTextDraw13Wrap + 1, &SubAddress, 4); // +1 はE9の次から4バイト分書き換えるから。
 
-	// 構築したニーモニック命令をTENSHOU.EXEのメモリに書き換える
+	// 構築したニーモニック命令を実行exeのメモリに書き換える
 	WriteProcessMemory(hCurrentProcess, (LPVOID)(pSSRExeJumpFromToOnSSRExeTextDraw13Wrap), cmdOnSSRExeJumpFromTextDraw13Wrap, 7, NULL);
 	//7バイトのみ書き込む
 	// 007E2E60  /$ 6A FF          PUSH -1

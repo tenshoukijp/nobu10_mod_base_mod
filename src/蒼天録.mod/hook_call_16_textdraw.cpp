@@ -31,7 +31,7 @@ void OnSSRExeTextDraw16Execute() {
 
 int pSSRExeJumpFromToOnSSRExeTextDraw16 = 0x7F73D1; // 関数はこのアドレスから、OnSSRExeTextDraw16へとジャンプしてくる。
 int pSSRExeJumpCallFromToOnSSRExeTextDraw16 = 0x7E2E60; // 元々あった処理のCall先
-int pSSRExeReturnLblFromOnSSRExeTextDraw16 = 0x7F73D6; // 関数が最後までいくと、このTENSHOU.EXE内に直接ジャンプする
+int pSSRExeReturnLblFromOnSSRExeTextDraw16 = 0x7F73D6; // 関数が最後までいくと、この実行exe内に直接ジャンプする
 
 #pragma warning(disable:4733)
 
@@ -84,7 +84,7 @@ void WriteAsmJumperOnSSRExeTextDraw16() {
 	// ５というのは、0046C194  -E9 ????????  JMP TSMod.OnTSExeGetDaimyoKoukeishaBushouID  の命令に必要なバイト数。要するに５バイト足すと次のニーモニック命令群に移動するのだ。そしてそこからの差分がジャンプする際の目的格として利用される。
 	memcpy(cmdOnSSRExeJumpFromTextDraw16 + 1, &SubAddress, 4); // +1 はE9の次から4バイト分書き換えるから。
 
-	// 構築したニーモニック命令をTENSHOU.EXEのメモリに書き換える
+	// 構築したニーモニック命令を実行exeのメモリに書き換える
 	WriteProcessMemory(hCurrentProcess, (LPVOID)(pSSRExeJumpFromToOnSSRExeTextDraw16), cmdOnSSRExeJumpFromTextDraw16, 5, NULL); //5バイトのみ書き込む
 }
 
